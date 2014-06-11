@@ -54,6 +54,21 @@ Octopress安装步骤可以参考 [象写程序一样写博客：搭建基于git
 * `rake preview` 在本机4000端口生成访问内容 
 * `rake deploy` 发布文件，同步到github master 
 
+##好卡##
+
+已经去掉了google 自定义字体去掉，打开发现还是卡的不行
+发现浏览器下边加载状态栏一直在loading这货: ajax.googleapis.com
+{% img /images/2014-06-11-ajax.googleapi.jpg %}
+
+于是猜想这玩意应该跟字体一样也被墙了吧，于是查找下：
+
+`find .* | xargs grep "ajax.googleapis.com"`
+发现果然在 /source/_include/head.html 用了
+`<script src="//ajax.googleapis.com//ajax/libs/jquery/1.9.1/jquery.min.js"></script>`
+找了下网上替换成下面的
+`<script src="//ajax.useso.com//ajax/libs/jquery/1.9.1/jquery.min.js"></script>`
+
+重新deploy，流畅得都没有抓着加载 ajax.useso.com 状态
 
 
 * [多台电脑协同使用octopress](http://www.orcame.com/blog/2013/12/26/octopress-multi-compoter/)
