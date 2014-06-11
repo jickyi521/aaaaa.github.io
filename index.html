@@ -390,8 +390,28 @@ rake new_post["Test"]
 <li><code>rake watch</code> 检测文件变化，实时生成新内容</li>
 <li><code>rake generate</code> 生成静态文件</li>
 <li><code>rake preview</code> 在本机4000端口生成访问内容</li>
-<li><p><code>rake deploy</code> 发布文件，同步到github master</p></li>
-<li><p><a href="http://www.orcame.com/blog/2013/12/26/octopress-multi-compoter/">多台电脑协同使用octopress</a></p></li>
+<li><code>rake deploy</code> 发布文件，同步到github master</li>
+</ul>
+
+
+<h2>好卡</h2>
+
+<p>已经去掉了google 自定义字体去掉，打开发现还是卡的不行
+发现浏览器下边加载状态栏一直在loading这货: ajax.googleapis.com
+<img src="/images/2014-06-11-ajax.googleapi.jpg"></p>
+
+<p>于是猜想这玩意应该跟字体一样也被墙了吧，于是查找下：</p>
+
+<p><code>find .* | xargs grep "ajax.googleapis.com"</code>
+发现果然在 /source/_include/head.html 用了
+<code>&lt;script src="//ajax.googleapis.com//ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;</code>
+找了下网上替换成下面的
+<code>&lt;script src="//ajax.useso.com//ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;</code></p>
+
+<p>重新deploy，流畅得都没有抓着加载 ajax.useso.com 状态</p>
+
+<ul>
+<li><a href="http://www.orcame.com/blog/2013/12/26/octopress-multi-compoter/">多台电脑协同使用octopress</a></li>
 <li><a href="http://www.tuicool.com/articles/N7bYfy">Gitcafe教程</a></li>
 </ul>
 
