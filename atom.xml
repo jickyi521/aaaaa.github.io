@@ -4,7 +4,7 @@
   <title><![CDATA[EasonWoW 的技术博客]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2014-06-10T23:44:33+08:00</updated>
+  <updated>2014-06-11T22:01:29+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress和gitcafe 的搭建]]></title>
+    <link href="http://jickyi521.github.io/blog/2014/06/11/octopress-gitcafe/"/>
+    <updated>2014-06-11T20:49:53+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2014/06/11/octopress-gitcafe</id>
+    <content type="html"><![CDATA[<p>Octopress安装步骤可以参考 <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">象写程序一样写博客：搭建基于github的博客</a></p>
+
+<p>在mac mini 和 mbp 上安装过程额外发现的问题如下:</p>
+
+<h2>bundle install 安装失败</h2>
+
+<pre><code>先安ruby的rvm环境
+
+rvm --force install 1.9.2  
+gem install bundle --no-ri --no-rdoc
+bundle install
+</code></pre>
+
+<p>  <a href="http://stackoverflow.com/questions/12119138/failed-to-build-gem-native-extension-when-install-redcloth-4-2-9-install-linux">Reference</a></p>
+
+<h2>Zsh下octopress命令不识别</h2>
+
+<pre><code>rake new_post["test"]
+-&gt;zsh: no matches found: new_post[test]
+
+*1、 由于zsh的通配符造成的 *, (, |, &lt;, [, ?, 可以用引号括起来 
+rake "new_post[test]"
+
+*2、要根治的话需要改zsh配置文件 加 alias rake="noglob rake" 取消通配    
+vim ~/.zshrc 
+</code></pre>
+
+<h2>中文标题问题</h2>
+
+<pre><code>rake new_post["测试"]
+rake generate 
+Creating new post: source/_posts/2014-06-10-ce-shi-zhong-wen.markdown
+
+octopress自动将中文转到了拼音，如果强制将 md 改成中文标题，博客可以显示标题但点进详情后找不着对应的index.html文件，需要手工补全才能显示详情页
+
+推荐做法
+rake new_post["Test"]
+编辑新生成的md文件中将 title:Test 改成 title:测试
+</code></pre>
+
+<h2>Commands</h2>
+
+<ul>
+<li><code>rake setup_github_pages</code> 设置github_pages</li>
+<li><code>rake new post['article name']</code> 生成博文框架，编辑md文件即可</li>
+<li><code>rake watch</code> 检测文件变化，实时生成新内容</li>
+<li><code>rake generate</code> 生成静态文件</li>
+<li><code>rake preview</code> 在本机4000端口生成访问内容</li>
+<li><p><code>rake deploy</code> 发布文件，同步到github master</p></li>
+<li><p><a href="http://www.orcame.com/blog/2013/12/26/octopress-multi-compoter/">多台电脑协同使用octopress</a></p></li>
+<li><a href="http://www.tuicool.com/articles/N7bYfy">Gitcafe教程</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Wolrd]]></title>
