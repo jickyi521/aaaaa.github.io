@@ -45,6 +45,17 @@ Octopress安装步骤可以参考 [象写程序一样写博客：搭建基于git
     rake new_post["Test"]
     编辑新生成的md文件中将 title:Test 改成 title:测试
 
+##rake generate非法字符问题##
+    
+    rake generate 
+    error: invalid byte sequence in US-ASCII
+
+    发现内容中文报错，认为是非法字符，因为默认是 US-ASCII 编码中无中文，改为UTF-8即可
+
+    vim ~/.bash_profile
+    加入: RUBYOPT="-KU -E utf-8:utf-8" 
+   
+
 ## Commands ##
 
 * `rake setup_github_pages` 设置github_pages
