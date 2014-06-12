@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>EasonWoW 的技术博客</title>
+  <title>iOS-Loading-View - EasonWoW 的技术博客</title>
   <meta name="author" content="EasonWoW">
 
   
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jickyi521.github.io">
+  <link rel="canonical" href="http://jickyi521.github.io/blog/2014/06/11/ios-loading-view">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="EasonWoW 的技术博客" type="application/atom+xml">
@@ -67,15 +67,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/06/11/ios-loading-view/">iOS-Loading-View</a></h1>
+      <h1 class="entry-title">iOS-Loading-View</h1>
     
     
       <p class="meta">
@@ -98,7 +95,7 @@
   </header>
 
 
-  <div class="entry-content"><h2>应用场景</h2>
+<div class="entry-content"><h2>应用场景</h2>
 
 <pre><code>在对用户或者流程上需要进行堵塞操作时候需要block，尤其是像Login, Oath 这种网络请求，
 这时候就需要个loadingview来作为缓冲（对于些展示的界面的网络请求，没有必要block)。
@@ -308,130 +305,16 @@ If you create a view object programmatically, this method is the designated init
 
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/11/octopress-gitcafe/">Octopress和gitcafe 的搭建</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">EasonWoW</span></span>
 
-<time datetime="2014-06-11T20:49:53+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopress安装步骤可以参考 <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">象写程序一样写博客：搭建基于github的博客</a></p>
-
-<p>在mac mini 和 mbp 上安装过程额外发现的问题如下:</p>
-
-<h2>bundle install 安装失败</h2>
-
-<pre><code>先安ruby的rvm环境
-
-rvm --force install 1.9.2  
-gem install bundle --no-ri --no-rdoc
-bundle install
-</code></pre>
-
-<p>  <a href="http://stackoverflow.com/questions/12119138/failed-to-build-gem-native-extension-when-install-redcloth-4-2-9-install-linux">Reference</a></p>
-
-<h2>Zsh下octopress命令不识别</h2>
-
-<pre><code>rake new_post["test"]
--&gt;zsh: no matches found: new_post[test]
-
-*1、 由于zsh的通配符造成的 *, (, |, &lt;, [, ?, 可以用引号括起来 
-rake "new_post[test]"
-
-*2、要根治的话需要改zsh配置文件 加 alias rake="noglob rake" 取消通配    
-vim ~/.zshrc 
-</code></pre>
-
-<h2>中文标题问题</h2>
-
-<pre><code>rake new_post["测试"]
-rake generate 
-Creating new post: source/_posts/2014-06-10-ce-shi-zhong-wen.markdown
-
-octopress自动将中文转到了拼音，如果强制将 md 改成中文标题，博客可以显示标题但点进详情后找不着对应的index.html文件，需要手工补全才能显示详情页
-
-推荐做法
-rake new_post["Test"]
-编辑新生成的md文件中将 title:Test 改成 title:测试
-</code></pre>
-
-<h2>Commands</h2>
-
-<ul>
-<li><code>rake setup_github_pages</code> 设置github_pages</li>
-<li><code>rake new post['article name']</code> 生成博文框架，编辑md文件即可</li>
-<li><code>rake watch</code> 检测文件变化，实时生成新内容</li>
-<li><code>rake generate</code> 生成静态文件</li>
-<li><code>rake preview</code> 在本机4000端口生成访问内容</li>
-<li><code>rake deploy</code> 发布文件，同步到github master</li>
-</ul>
-
-
-<h2>好卡</h2>
-
-<p>已经去掉了google 自定义字体去掉，打开发现还是卡的不行
-发现浏览器下边加载状态栏一直在loading这货: ajax.googleapis.com
-<img src="/images/2014-06-11-ajax.googleapi.jpg"></p>
-
-<p>于是猜想这玩意应该跟字体一样也被墙了吧，于是查找下：</p>
-
-<p><code>find .* | xargs grep "ajax.googleapis.com"</code>
-发现果然在 /source/_include/head.html 用了
-<code>&lt;script src="//ajax.googleapis.com//ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;</code>
-找了下网上替换成下面的
-<code>&lt;script src="//ajax.useso.com//ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;</code></p>
-
-<p>重新deploy，流畅得都没有抓着加载 ajax.useso.com 状态</p>
-
-<ul>
-<li><a href="http://www.orcame.com/blog/2013/12/26/octopress-multi-compoter/">多台电脑协同使用octopress</a></li>
-<li><a href="http://www.tuicool.com/articles/N7bYfy">Gitcafe教程</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/10/hello-wolrd/">Hello Wolrd</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -443,30 +326,58 @@ rake new_post["Test"]
   
 
 
-<time datetime="2014-06-10T23:29:04+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
-        
-      </p>
+<time datetime="2014-06-11T22:42:44+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  
+  
 
+  
+   		<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1394801336302625" charset="utf-8"></script>
+<!-- JiaThis Button END -->
 
-  <div class="entry-content"><ul>
-<li><code>echo Hello World</code></li>
-</ul>
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+<!-- UY END -->
+
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/11/octopress-gitcafe/" title="Previous Post: octopress和gitcafe 的搭建">&laquo; octopress和gitcafe 的搭建</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -494,6 +405,7 @@ rake new_post["Test"]
 
   
 </aside>
+
 
     </div>
   </div>
