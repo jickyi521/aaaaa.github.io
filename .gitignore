@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.gem
 *.rbc
 .bundle
@@ -16,3 +17,18 @@ tmp
 .yardoc
 _yardoc
 doc/
+=======
+.bundle
+.DS_Store
+.sass-cache
+.gist-cache
+.pygments-cache
+_deploy
+public
+sass.old
+source.old
+source/_stash
+source/stylesheets/screen.css
+vendor
+node_modules
+>>>>>>> ea52605a76f73e11117e4ea7b977e3e442684663
