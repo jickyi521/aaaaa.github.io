@@ -58,8 +58,9 @@
 <ul class="main-navigation">
   <li><a href="/">博客主页</a></li>
   <li><a href="/blog/archives">文章列表</a></li>
-  <li><a href="/blog/ios">iOS</a></li>
-  <li><a href="/blog/android">Android</a></li>
+  <li><a href="/blog/categories/ios">iOS</a></li>
+  <li><a href="/blog/categories/android">Android</a></li>
+  <li><a href="/about-me">About</a></li>
 </ul>
 
 </nav>
@@ -119,6 +120,9 @@ rake "new_post[test]"
 *2、要根治的话需要改zsh配置文件 加 alias rake="noglob rake" 取消通配    
 vim ~/.zshrc 
 </code></pre>
+
+<!--more-->
+
 
 <h2>中文标题问题</h2>
 
@@ -202,11 +206,8 @@ rake new_post["Test"]
   
    		<!-- JiaThis Button BEGIN -->
 <div class="jiathis_style_32x32">
-	<a class="jiathis_button_qzone"></a>
 	<a class="jiathis_button_tsina"></a>
-	<a class="jiathis_button_tqq"></a>
 	<a class="jiathis_button_weixin"></a>
-	<a class="jiathis_button_renren"></a>
 	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	<a class="jiathis_counter_style"></a>
 </div>
@@ -267,11 +268,96 @@ rake new_post["Test"]
 
     </div>
   </div>
-  <footer role="contentinfo">  <p>
+  <footer role="contentinfo">
+<p id = "back-top">
+      <a href="#top"><span></span>Back to Top</a>
+</p> 
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(../../images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+/*
+#back-top a:hover span {
+  background-color: #888;
+}
+*/
+</style>
+<script type="text/javascript" src="http://ajax.useso.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<p>
    &copy; 2014 - EasonWoW -
    <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
    <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
   </p>
+
+
 </footer>
   
 

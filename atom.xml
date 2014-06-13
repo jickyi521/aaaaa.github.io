@@ -4,7 +4,7 @@
   <title><![CDATA[EasonWoW 的技术博客]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2014-06-11T23:34:42+08:00</updated>
+  <updated>2014-06-13T22:58:24+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -102,6 +102,11 @@
 </span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
 
 
 <p><code>V2改进版，对getShareInstance进一步封装，对与外围试用者而言，只需要知道show和stop接口即可:</code></p>
@@ -261,6 +266,9 @@ rake "new_post[test]"
 *2、要根治的话需要改zsh配置文件 加 alias rake="noglob rake" 取消通配    
 vim ~/.zshrc 
 </code></pre>
+
+<!--more-->
+
 
 <h2>中文标题问题</h2>
 

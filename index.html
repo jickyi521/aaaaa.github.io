@@ -60,8 +60,9 @@
 <ul class="main-navigation">
   <li><a href="/">博客主页</a></li>
   <li><a href="/blog/archives">文章列表</a></li>
-  <li><a href="/blog/ios">iOS</a></li>
-  <li><a href="/blog/android">Android</a></li>
+  <li><a href="/blog/categories/ios">iOS</a></li>
+  <li><a href="/blog/categories/android">Android</a></li>
+  <li><a href="/about-me">About</a></li>
 </ul>
 
 </nav>
@@ -184,131 +185,14 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>V2改进版，对getShareInstance进一步封装，对与外围试用者而言，只需要知道show和stop接口即可:</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">.</span><span class="n">h</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">show</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">stop</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">.</span><span class="n">m</span>
-</span><span class='line'><span class="o">+</span><span class="p">(</span><span class="n">JYTLoadingView</span> <span class="o">*</span><span class="p">)</span> <span class="n">getShareInstance</span><span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">instance</span><span class="p">){</span>
-</span><span class='line'>        <span class="n">instance</span> <span class="o">=</span> <span class="p">[[</span><span class="n">JYTLoadingView</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">initWithFrame:</span><span class="p">(</span><span class="n">CGRect</span><span class="p">)</span><span class="n">frame</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">self</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;JYTLoadingView&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">CGRect</span> <span class="n">frame</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIScreen</span> <span class="n">mainScreen</span><span class="p">].</span><span class="n">bounds</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">center</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">cornerRadius</span> <span class="o">=</span> <span class="mf">8.0</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">+</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">show</span><span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="p">[[[</span><span class="n">JYTLoadingView</span> <span class="n">getShareInstance</span><span class="p">]</span> <span class="n">indicatorView</span><span class="p">]</span> <span class="n">startAnimating</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">].</span><span class="n">keyWindow</span> <span class="nl">addSubview:</span> <span class="p">[</span><span class="n">JYTLoadingView</span> <span class="n">getShareInstance</span><span class="p">]];</span>
-</span><span class='line'>     <span class="n">timer</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSTimer</span> <span class="nl">scheduledTimerWithTimeInterval:</span><span class="mi">3</span> <span class="nl">target:</span><span class="n">self</span> <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span> <span class="nl">userInfo:</span><span class="nb">nil</span> <span class="nl">repeats:</span><span class="n">NO</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">+</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">stop</span><span class="p">{</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">self</span> <span class="n">getShareInstance</span><span class="p">]</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>V3 .m进行改进，对于代码alloc 的方式，view走 initWithFrame, 而对于通过 IB方式的设计的view， 是不会走这个生命周期中的方法</code></p>
-
-<ul>
-<li>iOS文档：
-If you create a view object programmatically, this method is the designated initializer for theUIView class. Subclasses can override this method to perform any custom initialization but must callsuper at the beginning of their implementation.</li>
-</ul>
-
-
-<p>If you use Interface Builder to design your interface, this method is not called when your view objects are subsequently loaded from the nib file.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">+</span><span class="p">(</span><span class="n">LoadingScreen</span> <span class="o">*</span><span class="p">)</span><span class="nf">getShareInstance</span><span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">shareInstance</span><span class="p">){</span>
-</span><span class='line'>        <span class="n">shareInstance</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;LoadingScreen&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">shareInstance</span> <span class="n">mainLoadingView</span><span class="p">].</span><span class="n">center</span> <span class="o">=</span> <span class="n">shareInstance</span><span class="p">.</span><span class="n">center</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">shareInstance</span> <span class="n">loadingLable</span><span class="p">].</span><span class="n">text</span> <span class="o">=</span> <span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">@&quot;Indicator.Message.Loading&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">shareInstance</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">+</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">show</span><span class="p">{</span>
-</span><span class='line'>    <span class="p">[[[</span><span class="n">LoadingScreen</span> <span class="n">getShareInstance</span><span class="p">]</span> <span class="n">indicatorView</span><span class="p">]</span> <span class="n">startAnimating</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">].</span><span class="n">keyWindow</span> <span class="nl">addSubview:</span><span class="p">[</span><span class="n">LoadingScreen</span> <span class="n">getShareInstance</span><span class="p">]];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">+</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">stop</span><span class="p">{</span>
-</span><span class='line'>    <span class="p">[[[</span><span class="n">LoadingScreen</span> <span class="n">getShareInstance</span><span class="p">]</span> <span class="n">indicatorView</span><span class="p">]</span> <span class="n">stopAnimating</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">LoadingScreen</span> <span class="n">getShareInstance</span><span class="p">]</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
 
 
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/11/ios-loading-view/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -369,54 +253,12 @@ rake "new_post[test]"
 vim ~/.zshrc 
 </code></pre>
 
-<h2>中文标题问题</h2>
-
-<pre><code>rake new_post["测试"]
-rake generate 
-Creating new post: source/_posts/2014-06-10-ce-shi-zhong-wen.markdown
-
-octopress自动将中文转到了拼音，如果强制将 md 改成中文标题，博客可以显示标题但点进详情后找不着对应的index.html文件，需要手工补全才能显示详情页
-
-推荐做法
-rake new_post["Test"]
-编辑新生成的md文件中将 title:Test 改成 title:测试
-</code></pre>
-
-<h2>Commands</h2>
-
-<ul>
-<li><code>rake setup_github_pages</code> 设置github_pages</li>
-<li><code>rake new post['article name']</code> 生成博文框架，编辑md文件即可</li>
-<li><code>rake watch</code> 检测文件变化，实时生成新内容</li>
-<li><code>rake generate</code> 生成静态文件</li>
-<li><code>rake preview</code> 在本机4000端口生成访问内容</li>
-<li><code>rake deploy</code> 发布文件，同步到github master</li>
-</ul>
-
-
-<h2>好卡</h2>
-
-<p>已经去掉了google 自定义字体去掉，打开发现还是卡的不行
-发现浏览器下边加载状态栏一直在loading这货: ajax.googleapis.com
-<img src="/images/2014-06-11-ajax.googleapi.jpg"></p>
-
-<p>于是猜想这玩意应该跟字体一样也被墙了吧，于是查找下：</p>
-
-<p><code>find .* | xargs grep "ajax.googleapis.com"</code>
-发现果然在 /source/_include/head.html 用了
-<code>&lt;script src="//ajax.googleapis.com//ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;</code>
-找了下网上替换成下面的
-<code>&lt;script src="//ajax.useso.com//ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;</code></p>
-
-<p>重新deploy，流畅得都没有抓着加载 ajax.useso.com 状态</p>
-
-<ul>
-<li><a href="http://www.orcame.com/blog/2013/12/26/octopress-multi-compoter/">多台电脑协同使用octopress</a></li>
-<li><a href="http://www.tuicool.com/articles/N7bYfy">Gitcafe教程</a></li>
-</ul>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/11/octopress-gitcafe/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -497,11 +339,96 @@ rake new_post["Test"]
 
     </div>
   </div>
-  <footer role="contentinfo">  <p>
+  <footer role="contentinfo">
+<p id = "back-top">
+      <a href="#top"><span></span>Back to Top</a>
+</p> 
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(../../images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+/*
+#back-top a:hover span {
+  background-color: #888;
+}
+*/
+</style>
+<script type="text/javascript" src="http://ajax.useso.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<p>
    &copy; 2014 - EasonWoW -
    <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
    <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
   </p>
+
+
 </footer>
   
 

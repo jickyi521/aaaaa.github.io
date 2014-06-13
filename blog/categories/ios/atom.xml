@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | EasonWoW 的技术博客]]></title>
   <link href="http://jickyi521.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2014-06-11T23:34:42+08:00</updated>
+  <updated>2014-06-13T22:58:24+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -132,6 +132,9 @@
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<!--more-->
+
 
 <p><code>V2改进版，对getShareInstance进一步封装，对与外围试用者而言，只需要知道show和stop接口即可:</code></p>
 
