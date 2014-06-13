@@ -56,6 +56,8 @@ categories: iOS
 
 {% endcodeblock %}
 
+<!--more-->
+
 `V2改进版，对getShareInstance进一步封装，对与外围试用者而言，只需要知道show和stop接口即可:`
 
 {% codeblock lang:objective-c %}

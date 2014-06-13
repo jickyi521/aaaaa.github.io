@@ -32,6 +32,7 @@ Octopress安装步骤可以参考 [象写程序一样写博客：搭建基于git
     *2、要根治的话需要改zsh配置文件 加 alias rake="noglob rake" 取消通配    
 	vim ~/.zshrc 
 
+<!--more-->
 
 ##中文标题问题##
 	
