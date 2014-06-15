@@ -32,9 +32,9 @@ Octopress安装步骤可以参考 [象写程序一样写博客：搭建基于git
     *2、要根治的话需要改zsh配置文件 加 alias rake="noglob rake" 取消通配    
 	vim ~/.zshrc 
 
-
-##中文标题问题##
+##中文问题##
 	
+     `中文标题`
 	rake new_post["测试"]
 	rake generate 
     Creating new post: source/_posts/2014-06-10-ce-shi-zhong-wen.markdown
@@ -44,6 +44,14 @@ Octopress安装步骤可以参考 [象写程序一样写博客：搭建基于git
     推荐做法
     rake new_post["Test"]
     编辑新生成的md文件中将 title:Test 改成 title:测试
+
+    ‘中文内容’
+    rake generate 可能出现error: invalid byte sequence in US-ASCII
+    将编码格式设为 utf-8
+    vim ~/.profile 加入(登录默认载入的配置文件) 
+    NG=en_US.UTF-8
+    LC_ALL=en_US.UTF-8
+
 
 ## Commands ##
 
