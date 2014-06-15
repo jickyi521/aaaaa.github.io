@@ -22,11 +22,10 @@ for(UIView *subview in self.view.subviews){
  
 `发现一种新的写法`
 
-{% codeblock lang:objective-c %}
-
-	[self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-
 这种方式对遍历封装好了，简洁且高效
 //Sends to each object in the array the message identified by a given selector, starting with the first object and continuing through the array to the last object.
 
+{% codeblock lang:objective-c %}
+
+	[self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 {% endcodeblock%}
