@@ -121,12 +121,13 @@ rake "new_post[test]"
 vim ~/.zshrc 
 </code></pre>
 
+<h2>中文问题</h2>
+
 <!--more-->
 
 
-<h2>中文标题问题</h2>
-
-<pre><code>rake new_post["测试"]
+<pre><code> `中文标题`
+rake new_post["测试"]
 rake generate 
 Creating new post: source/_posts/2014-06-10-ce-shi-zhong-wen.markdown
 
@@ -135,6 +136,13 @@ octopress自动将中文转到了拼音，如果强制将 md 改成中文标题�
 推荐做法
 rake new_post["Test"]
 编辑新生成的md文件中将 title:Test 改成 title:测试
+
+‘中文内容’
+rake generate 可能出现error: invalid byte sequence in US-ASCII
+将编码格式设为 utf-8
+vim ~/.profile 加入(登录默认载入的配置文件) 
+NG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
 </code></pre>
 
 <h2>Commands</h2>
@@ -244,6 +252,14 @@ rake new_post["Test"]
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/14/two-ways-init-customer-view/">两种添加自定义view的方式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/14/traversal-send-message/">遍历发消息</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/11/ios-loading-view/">iOS-Loading-View</a>
       </li>
     
@@ -261,6 +277,11 @@ rake new_post["Test"]
 
 
 
+<section>
+  <h1>访客地图</h1>
+  <script type="text/javascript" src="http://jh.revolvermaps.com/2/1.js?i=7vm1s79rfqr&amp;s=220&amp;m=0&amp;v=false&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async"></script>
+  <!--将上文获取的代码添加到这-->
+</section>
 
   
 </aside>

@@ -2,30 +2,38 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://jickyi521.github.io/blog/2014/06/10/hello-wolrd/</loc>
-        <lastmod>2014-06-10T23:30:06+08:00</lastmod>
+        <lastmod>2014-06-15T18:08:28+08:00</lastmod>
     </url>
     <url>
         <loc>http://jickyi521.github.io/blog/2014/06/11/octopress-gitcafe/</loc>
-        <lastmod>2014-06-13T22:52:46+08:00</lastmod>
+        <lastmod>2014-06-15T18:24:25+08:00</lastmod>
     </url>
     <url>
         <loc>http://jickyi521.github.io/blog/2014/06/11/ios-loading-view/</loc>
-        <lastmod>2014-06-13T22:52:37+08:00</lastmod>
+        <lastmod>2014-06-15T18:08:28+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jickyi521.github.io/blog/2014/06/14/traversal-send-message/</loc>
+        <lastmod>2014-06-15T18:27:26+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jickyi521.github.io/blog/2014/06/14/two-ways-init-customer-view/</loc>
+        <lastmod>2014-06-15T18:24:25+08:00</lastmod>
     </url>
     <url>
         <loc>http://jickyi521.github.io/about-me/</loc>
-        <lastmod>2014-06-13T22:17:09+08:00</lastmod>
+        <lastmod>2014-06-15T18:08:28+08:00</lastmod>
     </url>
     <url>
         <loc>http://jickyi521.github.io/blog/archives/</loc>
-        <lastmod>2014-06-13T22:52:46+08:00</lastmod>
+        <lastmod>2014-06-15T18:27:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://jickyi521.github.io/</loc>
-        <lastmod>2014-06-13T22:52:46+08:00</lastmod>
+        <lastmod>2014-06-15T18:27:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://jickyi521.github.io/robots.txt</loc>
-        <lastmod>2014-06-10T22:13:14+08:00</lastmod>
+        <lastmod>2014-06-15T18:08:28+08:00</lastmod>
     </url>
 </urlset>

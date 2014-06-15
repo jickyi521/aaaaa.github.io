@@ -4,7 +4,7 @@
   <title><![CDATA[EasonWoW 的技术博客]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2014-06-13T22:58:24+08:00</updated>
+  <updated>2014-06-15T18:27:30+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[两种添加自定义view的方式]]></title>
+    <link href="http://jickyi521.github.io/blog/2014/06/14/two-ways-init-customer-view/"/>
+    <updated>2014-06-14T15:17:13+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2014/06/14/two-ways-init-customer-view</id>
+    <content type="html"><![CDATA[<p>这种使用场景最普遍了吧，稍不留神就碰到没有将自定的custom的view加成功的trick</p>
+
+<p><code>需要注意的两点</code></p>
+
+<ul>
+<li>1、对于ViewController 在xib文件里 File&rsquo;s Owner 右侧 inspector 中的custom 对于ViewController,不然识别不了里面的outlet和IBAction</li>
+</ul>
+
+
+<p><img src="http://jickyi521.github.io/images/iOS_fileowner.png"></p>
+
+<ul>
+<li>2、对于普通的 custom UIView 需要将最顶层的UIView 的custom class填对应即可:</li>
+</ul>
+
+
+<p><img src="http://jickyi521.github.io/images/iOS_customclass.png"></p>
+
+<p>两种添加方式，上代码吧&hellip;</p>
+
+<p><code>第一种:</code></p>
+
+<p> 常见的方式在需要加入custom view处进行初始化
+ 需要注意的是，这种方式去初始化CustomView的时候是不会调 initFrame 构造方法，所以外面需要主动给frame</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">CustomView</span> <span class="o">*</span><span class="n">customView</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;CustomView&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <code>第二种:</code></p>
+
+<p>常见的方式在需要加入custom view处进行初始化, 然后在 CustomView 里面的  initWithFrame 去 load</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">CustomView</span> <span class="o">*</span><span class="n">customView</span> <span class="o">=</span> <span class="p">[</span><span class="n">CustomView</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithFrame</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithFrame:</span><span class="p">(</span><span class="n">CGRect</span><span class="p">)</span><span class="nv">frame</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nl">initWithFrame:</span><span class="n">frame</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">self</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;CustomView&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>推荐用第二种方式，封装性更好，也可以避免没有set frame的坑。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[遍历发消息]]></title>
+    <link href="http://jickyi521.github.io/blog/2014/06/14/traversal-send-message/"/>
+    <updated>2014-06-14T13:07:07+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2014/06/14/traversal-send-message</id>
+    <content type="html"><![CDATA[<h2>应用场景</h2>
+
+<p>对一个有许多 subview 的 ViewContainer 要加入新view之前需要先移干净 之前的view，以防止新view被污染
+以前的做法</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">for</span><span class="p">(</span><span class="n">UIView</span> <span class="o">*</span><span class="n">subview</span> <span class="k">in</span> <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">subviews</span><span class="p">){</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">subview</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
+</span><span class='line'> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>发现一种新的写法</code></p>
+
+<p>这种方式对遍历封装好了，简洁且高效
+//Sends to each object in the array the message identified by a given selector, starting with the first object and continuing through the array to the last object.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">subviews</span> <span class="nl">makeObjectsPerformSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="n">removeFromSuperview</span><span class="p">)];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS-Loading-View]]></title>
@@ -267,12 +366,13 @@ rake "new_post[test]"
 vim ~/.zshrc 
 </code></pre>
 
+<h2>中文问题</h2>
+
 <!--more-->
 
 
-<h2>中文标题问题</h2>
-
-<pre><code>rake new_post["测试"]
+<pre><code> `中文标题`
+rake new_post["测试"]
 rake generate 
 Creating new post: source/_posts/2014-06-10-ce-shi-zhong-wen.markdown
 
@@ -281,6 +381,13 @@ octopress自动将中文转到了拼音，如果强制将 md 改成中文标题�
 推荐做法
 rake new_post["Test"]
 编辑新生成的md文件中将 title:Test 改成 title:测试
+
+‘中文内容’
+rake generate 可能出现error: invalid byte sequence in US-ASCII
+将编码格式设为 utf-8
+vim ~/.profile 加入(登录默认载入的配置文件) 
+NG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
 </code></pre>
 
 <h2>Commands</h2>
