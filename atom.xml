@@ -4,7 +4,7 @@
   <title><![CDATA[EasonWoW 的技术博客]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2014-07-03T07:18:10+08:00</updated>
+  <updated>2014-07-03T07:19:41+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -23,15 +23,15 @@
 <p>iOS 7.0 statusbar 20px 和 navigationbar 44px在默认的情况下是透明的也就是VC的
 self.view （0，0）是从 最左上角开始。</p>
 
-<p><img src="http://jickyi521.github.io/images/0702-01"></p>
+<p><img src="http://jickyi521.github.io/images/0702-01.png"></p>
 
 <p>在默认情况下普通的UIView和UIScrollView添加 红色的view (0,0,64,64) 展现的形式是不一样的</p>
 
 <ul>
 <li><p>UIVIew
-<img src="http://jickyi521.github.io/images/0702-02"></p></li>
+<img src="http://jickyi521.github.io/images/0702-02.png"></p></li>
 <li><p>UITableView
-<img src="http://jickyi521.github.io/images/0702-03"></p></li>
+<img src="http://jickyi521.github.io/images/0702-03.png"></p></li>
 </ul>
 
 
