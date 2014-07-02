@@ -4,7 +4,7 @@
   <title><![CDATA[EasonWoW 的技术博客]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2014-06-15T18:27:30+08:00</updated>
+  <updated>2014-07-03T07:18:10+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[automaticallyAdjustsScrollViewInsets 和 Translucent 属性]]></title>
+    <link href="http://jickyi521.github.io/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/"/>
+    <updated>2014-07-02T22:18:15+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets</id>
+    <content type="html"><![CDATA[<p>最近在调UITabBarVC 里navigationbar吃掉contentview bug，最后主要定位到 automaticallyAdjustsScrollViewInsets 和 translucent属性使用不正确</p>
+
+<p>iOS 7.0 statusbar 20px 和 navigationbar 44px在默认的情况下是透明的也就是VC的
+self.view （0，0）是从 最左上角开始。</p>
+
+<p><img src="http://jickyi521.github.io/images/0702-01"></p>
+
+<p>在默认情况下普通的UIView和UIScrollView添加 红色的view (0,0,64,64) 展现的形式是不一样的</p>
+
+<ul>
+<li><p>UIVIew
+<img src="http://jickyi521.github.io/images/0702-02"></p></li>
+<li><p>UITableView
+<img src="http://jickyi521.github.io/images/0702-03"></p></li>
+</ul>
+
+
+<p>这种情形与 automaticallyAdjustsScrollViewInsets 和 translucent属性所决定</p>
+
+<h2>automaticallyAdjustsScrollViewInsets</h2>
+
+<p><code>Specifies whether or not the view controller should automatically adjust its scroll view insets.
+Default value is YES, which allows the view controller to adjust its scroll view insets in response to the screen areas consumed by the status bar, navigation bar, and toolbar or tab bar. Set to NO if you want to manage scroll view inset adjustments yourself, such as when there is more than one scroll view in the view hierarchy.</code></p>
+
+<p>这个参数是7.0 出来，主要是为带有 UIScrollView 的控件所服务，且属性默认是YES, 也就是说</p>
+
+<!--more-->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[两种添加自定义view的方式]]></title>
