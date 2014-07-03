@@ -9,7 +9,7 @@
   <meta name="author" content="EasonWoW">
 
   
-  <meta name="description" content="最近在调UITabBarVC 里navigationbar吃掉contentview bug，最后主要定位到 automaticallyAdjustsScrollViewInsets 和 translucent属性使用不正确 iOS 7.0 statusbar 20px 和 &hellip;">
+  <meta name="description" content="最近在调UITabBarVC 里navigationbar吃掉contentview bug，最后主要定位到 automaticallyAdjustsScrollViewInsets 和 translucent属性使用不正确 iOS 7.0 statusbar 20points 和 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +74,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/">automaticallyAdjustsScrollViewInsets 和 Translucent 属性</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/">AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性</a></h1>
     
     
       <p class="meta">
@@ -99,22 +99,41 @@
 
   <div class="entry-content"><p>最近在调UITabBarVC 里navigationbar吃掉contentview bug，最后主要定位到 automaticallyAdjustsScrollViewInsets 和 translucent属性使用不正确</p>
 
-<p>iOS 7.0 statusbar 20px 和 navigationbar 44px在默认的情况下是透明的也就是VC的
+<p>iOS 7.0 statusbar 20points 和 navigationbar 44points在默认的情况下是透明的也就是VC的
 self.view （0，0）是从 最左上角开始。</p>
 
 <p><img src="/images/0702-01.png"></p>
 
 <p>在默认情况下普通的UIView和UIScrollView添加 红色的view (0,0,64,64) 展现的形式是不一样的</p>
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addRedUIView</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">UIView</span> <span class="o">*</span><span class="n">redView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">redView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addSubview:</span><span class="n">redView</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <ul>
-<li><p>UIVIew
-<img src="/images/0702-02.png"></p></li>
-<li><p>UITableView
-<img src="/images/0702-03.png"></p></li>
+<li>UIVIew</li>
 </ul>
 
 
-<p>这种情形与 automaticallyAdjustsScrollViewInsets 和 translucent属性所决定</p>
+<p><img src="/images/0702-02.png"></p>
+
+<ul>
+<li>UITableView</li>
+</ul>
+
+
+<p><img src="/images/0702-03.png"></p>
+
+<p>这种情形由 automaticallyAdjustsScrollViewInsets 和 translucent属性所决定</p>
 
 <h2>automaticallyAdjustsScrollViewInsets</h2>
 
@@ -534,7 +553,7 @@ vim ~/.zshrc
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/">automaticallyAdjustsScrollViewInsets 和 Translucent 属性</a>
+        <a href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/">AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性</a>
       </li>
     
       <li class="post">

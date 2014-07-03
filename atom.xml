@@ -4,7 +4,7 @@
   <title><![CDATA[EasonWoW 的技术博客]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2014-07-03T07:19:41+08:00</updated>
+  <updated>2014-07-03T23:29:32+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -14,28 +14,47 @@
 
   
   <entry>
-    <title type="html"><![CDATA[automaticallyAdjustsScrollViewInsets 和 Translucent 属性]]></title>
+    <title type="html"><![CDATA[AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性]]></title>
     <link href="http://jickyi521.github.io/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/"/>
     <updated>2014-07-02T22:18:15+08:00</updated>
     <id>http://jickyi521.github.io/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets</id>
     <content type="html"><![CDATA[<p>最近在调UITabBarVC 里navigationbar吃掉contentview bug，最后主要定位到 automaticallyAdjustsScrollViewInsets 和 translucent属性使用不正确</p>
 
-<p>iOS 7.0 statusbar 20px 和 navigationbar 44px在默认的情况下是透明的也就是VC的
+<p>iOS 7.0 statusbar 20points 和 navigationbar 44points在默认的情况下是透明的也就是VC的
 self.view （0，0）是从 最左上角开始。</p>
 
 <p><img src="http://jickyi521.github.io/images/0702-01.png"></p>
 
 <p>在默认情况下普通的UIView和UIScrollView添加 红色的view (0,0,64,64) 展现的形式是不一样的</p>
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addRedUIView</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">UIView</span> <span class="o">*</span><span class="n">redView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">redView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addSubview:</span><span class="n">redView</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <ul>
-<li><p>UIVIew
-<img src="http://jickyi521.github.io/images/0702-02.png"></p></li>
-<li><p>UITableView
-<img src="http://jickyi521.github.io/images/0702-03.png"></p></li>
+<li>UIVIew</li>
 </ul>
 
 
-<p>这种情形与 automaticallyAdjustsScrollViewInsets 和 translucent属性所决定</p>
+<p><img src="http://jickyi521.github.io/images/0702-02.png"></p>
+
+<ul>
+<li>UITableView</li>
+</ul>
+
+
+<p><img src="http://jickyi521.github.io/images/0702-03.png"></p>
+
+<p>这种情形由 automaticallyAdjustsScrollViewInsets 和 translucent属性所决定</p>
 
 <h2>automaticallyAdjustsScrollViewInsets</h2>
 
@@ -46,6 +65,31 @@ Default value is YES, which allows the view controller to adjust its scroll view
 
 <!--more-->
 
+
+<p>在透明bar情形下，都会给加上个 64points 的insets， insets就是一个padding概念。
+[self.tableView setContentInset:UIEdgeInsetsMake(64, 0, 0, 0)];</p>
+
+<ul>
+<li>1、navigationbar 透明</li>
+</ul>
+
+
+<p><img src="http://jickyi521.github.io/images/07-03-01.png"></p>
+
+<p>即 self.navigationController.navigationBar.translucent = YES; 往navigation里面加的view都会往navigationbar里面进去，
+对于scrollview的控件可以加个 UIEdgeInsetsMake(64, 0, 0, 0) 的insets，</p>
+
+<p>而对于普通的uiview这种情况推荐最上层套个UIScrollView去处理，也可以将view在IB里面往下移动64去显示，注意点对对齐位置方式。不建议用代码去控制，太繁琐，尤其在考虑多屏幕下横竖屏情况，用autolayout是最合适的方式，还不熟悉呢这块。</p>
+
+<ul>
+<li>2、navigationbar 不透明</li>
+</ul>
+
+
+<p>view自动在navigationbar下面显示，不需要处理。</p>
+
+<p> <a href="http://www.doubleencore.com/2013/12/reconciling-ios-6-ios-7-using-interface-builder/">iOS 6 &ndash; 7 的status bar兼容</a>   <br>
+ <a href="http://www.doubleencore.com/2013/09/developers-guide-to-the-ios-7-status-bar/">Developer’s Guide to the iOS 7 Status Bar</a></p>
 ]]></content>
   </entry>
   
