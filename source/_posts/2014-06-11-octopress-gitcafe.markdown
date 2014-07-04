@@ -80,6 +80,21 @@ Octopress安装步骤可以参考 [象写程序一样写博客：搭建基于git
 
 重新deploy，流畅得都没有抓着加载 ajax.useso.com 状态
 
+##多台电脑协同使用octopress##
+
+git会映射到两处的remote:  github上和gitcafe server
+
+  gitcafe/gitcafe-pages
+  gitcafe/master
+  origin/master
+  origin/source
+
+流程: 
+* 1、本地需要在origin source下干活，完事后将本地的改动 git push origin source
+* 2、rake generate rake deploy 将本地的改动生效后 deploy到 gitcafe 和 github 上的master 分支上
+* 3、在其他电脑上， 先 git pull origin source 将远程的 souce 拉倒本地 mege，接下来的 流程与 1、2 一样
+
+github pages 或者 gitcafe pages 会去加载 其master 分支下的静态页面显示。
 
 * [多台电脑协同使用octopress](http://www.orcame.com/blog/2013/12/26/octopress-multi-compoter/)
 * [Gitcafe教程](http://www.tuicool.com/articles/N7bYfy)
