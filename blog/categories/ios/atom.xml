@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: iOS | EasonWoW 的技术博客]]></title>
+  <title><![CDATA[Category: iOS | A blog of EasonWoW]]></title>
   <link href="http://jickyi521.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2014-07-03T23:32:16+08:00</updated>
+  <updated>2014-08-05T21:52:28+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -95,6 +95,45 @@ Default value is YES, which allows the view controller to adjust its scroll view
 
 <p> <a href="http://www.doubleencore.com/2013/12/reconciling-ios-6-ios-7-using-interface-builder/">iOS 6 &ndash; 7 的status bar兼容</a>   <br>
  <a href="http://www.doubleencore.com/2013/09/developers-guide-to-the-ios-7-status-bar/">Developer’s Guide to the iOS 7 Status Bar</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS-tableview-reuse-cell]]></title>
+    <link href="http://jickyi521.github.io/blog/2014/06/17/ios-tableview-reuse-cell/"/>
+    <updated>2014-06-17T09:45:31+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2014/06/17/ios-tableview-reuse-cell</id>
+    <content type="html"><![CDATA[<p>static NSString <em>identifier = @&ldquo;cell&rdquo;;
+UICustomerCell </em>cell = [tableView dequeueReusableCellWithIdentifier:identifier];</p>
+
+<p>在 UICustomerCell 需要托人 UITableVIewCell 的控件 设置 identifier 为 &ldquo;cell&rdquo;</p>
+
+<p>这样重用有重用，否则只是拖入的 UIView， 重用机制失效，每次还都会创建新的实例cell</p>
+
+<p>Android里的重用 viewHolder</p>
+
+<p> @Override</p>
+
+<pre><code>public View getView(int position, View convertView, ViewGroup parent) {
+    ViewHolder viewHolder = null;
+    if (convertView == null) {
+        convertView = View.inflate(mContext, R.layout.test, null);
+        viewHolder = new ViewHolder();
+        viewHolder.imageView = (ImageView) convertView.findViewById(R.id.item_image);
+        viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.item_text);
+        convertView.setTag(viewHolder);
+    } else {
+        viewHolder = (ViewHolder) convertView.getTag();
+    }
+    return convertView;
+}
+
+
+class ViewHolder {
+    ImageView imageView;
+    TextView titleTextView;
+}
+</code></pre>
 ]]></content>
   </entry>
   

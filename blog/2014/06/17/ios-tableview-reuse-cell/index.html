@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: iOS - A blog of EasonWoW</title>
+  <title>iOS-tableview-reuse-cell - A blog of EasonWoW</title>
   <meta name="author" content="EasonWoW">
 
   
-  <meta name="description" content="Category: iOS">
+  <meta name="description" content="static NSString identifier = @&ldquo;cell&rdquo;;
+UICustomerCell cell = [tableView dequeueReusableCellWithIdentifier:identifier]; 在 UICustomerCell &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jickyi521.github.ioblog/categories/ios">
+  <link rel="canonical" href="http://jickyi521.github.io/blog/2014/06/17/ios-tableview-reuse-cell">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="A blog of EasonWoW" type="application/atom+xml">
@@ -67,91 +68,133 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: iOS</h1>
+    
+      <h1 class="entry-title">iOS-tableview-reuse-cell</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-17T09:45:31+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>static NSString <em>identifier = @&ldquo;cell&rdquo;;
+UICustomerCell </em>cell = [tableView dequeueReusableCellWithIdentifier:identifier];</p>
 
-  
-  <h2>2014</h2>
+<p>在 UICustomerCell 需要托人 UITableVIewCell 的控件 设置 identifier 为 &ldquo;cell&rdquo;</p>
 
-<article>
-  
-<h1><a href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/">AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性</a></h1>
-<time datetime="2014-07-02T22:18:15+08:00" pubdate><span class='month'>Jul</span> <span class='day'>02</span> <span class='year'>2014</span></time>
+<p>这样重用有重用，否则只是拖入的 UIView， 重用机制失效，每次还都会创建新的实例cell</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
+<p>Android里的重用 viewHolder</p>
 
+<p> @Override</p>
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/06/17/ios-tableview-reuse-cell/">iOS-tableview-reuse-cell</a></h1>
-<time datetime="2014-06-17T09:45:31+08:00" pubdate><span class='month'>Jun</span> <span class='day'>17</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
+<pre><code>public View getView(int position, View convertView, ViewGroup parent) {
+    ViewHolder viewHolder = null;
+    if (convertView == null) {
+        convertView = View.inflate(mContext, R.layout.test, null);
+        viewHolder = new ViewHolder();
+        viewHolder.imageView = (ImageView) convertView.findViewById(R.id.item_image);
+        viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.item_text);
+        convertView.setTag(viewHolder);
+    } else {
+        viewHolder = (ViewHolder) convertView.getTag();
+    }
+    return convertView;
+}
 
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/06/14/two-ways-init-customer-view/">两种添加自定义view的方式</a></h1>
-<time datetime="2014-06-14T15:17:13+08:00" pubdate><span class='month'>Jun</span> <span class='day'>14</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/06/14/traversal-send-message/">遍历发消息</a></h1>
-<time datetime="2014-06-14T13:07:07+08:00" pubdate><span class='month'>Jun</span> <span class='day'>14</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/06/11/ios-loading-view/">iOS-Loading-View</a></h1>
-<time datetime="2014-06-11T22:42:44+08:00" pubdate><span class='month'>Jun</span> <span class='day'>11</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
-
-
-</article>
-
+class ViewHolder {
+    ImageView imageView;
+    TextView titleTextView;
+}
+</code></pre>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">EasonWoW</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-17T09:45:31+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+
+  
+   		<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1394801336302625" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+<!-- UY END -->
+
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/14/two-ways-init-customer-view/" title="Previous Post: 两种添加自定义view的方式">&laquo; 两种添加自定义view的方式</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/" title="Next Post:  AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性"> AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性 &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>

@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress和gitcafe 的搭建 - EasonWoW 的技术博客</title>
+  <title>Octopress和gitcafe 的搭建 - A blog of EasonWoW</title>
   <meta name="author" content="EasonWoW">
 
   
@@ -21,7 +21,7 @@
   <link rel="canonical" href="http://jickyi521.github.io/blog/2014/06/11/octopress-gitcafe">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="EasonWoW 的技术博客" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="A blog of EasonWoW" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.useso.com//ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -36,9 +36,9 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">EasonWoW 的技术博客</a></h1>
+  <h1><a href="/">A blog of EasonWoW</a></h1>
   
-    <h2>记录下自己学习的点滴</h2>
+    <h2>Keep Moving</h2>
   
 </hgroup>
 
@@ -173,6 +173,22 @@ LC_ALL=en_US.UTF-8
 
 <p>重新deploy，流畅得都没有抓着加载 ajax.useso.com 状态</p>
 
+<h2>多台电脑协同使用octopress</h2>
+
+<p>git会映射到两处的remote:  github上和gitcafe server</p>
+
+<p>  gitcafe/gitcafe-pages
+  gitcafe/master
+  origin/master
+  origin/source</p>
+
+<p>流程:
+* 1、本地需要在origin source下干活，完事后将本地的改动 git push origin source
+* 2、rake generate rake deploy 将本地的改动生效后 deploy到 gitcafe 和 github 上的master 分支上
+* 3、在其他电脑上， 先 git pull origin source 将远程的 souce 拉倒本地 mege，接下来的 流程与 1、2 一样</p>
+
+<p>github pages 或者 gitcafe pages 会去加载 其master 分支下的静态页面显示。</p>
+
 <ul>
 <li><a href="http://www.orcame.com/blog/2013/12/26/octopress-multi-compoter/">多台电脑协同使用octopress</a></li>
 <li><a href="http://www.tuicool.com/articles/N7bYfy">Gitcafe教程</a></li>
@@ -256,6 +272,10 @@ LC_ALL=en_US.UTF-8
       </li>
     
       <li class="post">
+        <a href="/blog/2014/06/17/ios-tableview-reuse-cell/">iOS-tableview-reuse-cell</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/14/two-ways-init-customer-view/">两种添加自定义view的方式</a>
       </li>
     
@@ -265,10 +285,6 @@ LC_ALL=en_US.UTF-8
     
       <li class="post">
         <a href="/blog/2014/06/11/ios-loading-view/">iOS-Loading-View</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/11/octopress-gitcafe/">Octopress和gitcafe 的搭建</a>
       </li>
     
   </ul>
