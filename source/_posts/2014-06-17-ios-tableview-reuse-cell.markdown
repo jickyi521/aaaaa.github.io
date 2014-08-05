@@ -3,12 +3,14 @@ layout: post
 title: "iOS-tableview-reuse-cell"
 date: 2014-06-17 09:45:31 +0800
 comments: true
-categories: 
+categories: iOS
 ---
+
 
 static NSString *identifier = @"cell";
 UICustomerCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-在 UICustomerCell 需要托人 UITableVIewCell 的空间 设置 identifier 为 "cell"
+
+在 UICustomerCell 需要托人 UITableVIewCell 的控件 设置 identifier 为 "cell"
 
 这样重用有重用，否则只是拖入的 UIView， 重用机制失效，每次还都会创建新的实例cell
 
