@@ -271,11 +271,6 @@ multitask :push do
     system "git push -u gitcafe master:gitcafe-pages"
   end
 
-
-  do
-    puts "don't forget push origin source to github source branch"
-  end 
-
 end
 
 desc "Update configurations to support publishing to root or sub directory"
