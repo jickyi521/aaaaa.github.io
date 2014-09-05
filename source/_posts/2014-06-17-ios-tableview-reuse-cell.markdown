@@ -6,6 +6,7 @@ comments: true
 categories: iOS
 ---
 
+第一次需要实例化一屏所能展 Contentview N个的实例入queue，对下次屏幕展示的view分别都重用这N个。
 
 static NSString *identifier = @"cell";
 UICustomerCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];

@@ -270,6 +270,12 @@ multitask :push do
     system "git remote add gitcafe git@gitcafe.com:jickyi521/jickyi521.git >> /dev/null 2>&1"
     system "git push -u gitcafe master:gitcafe-pages"
   end
+
+
+  do
+    puts "don't forget push origin source to github source branch"
+  end 
+
 end
 
 desc "Update configurations to support publishing to root or sub directory"
