@@ -9,7 +9,8 @@
   <meta name="author" content="EasonWoW">
 
   
-  <meta name="description" content="最近在调UITabBarVC 里navigationbar吃掉contentview bug，最后主要定位到 automaticallyAdjustsScrollViewInsets 和 translucent属性使用不正确 iOS 7.0 statusbar 20points 和 &hellip;">
+  <meta name="description" content="之前在做UI的事件处理时，往往会有些新(蛋)颖(疼)的需求，比如要点击某块区域才能触发事件。
+这时候首先想到的方法是在这块区域上面加块蒙版(UIButton)，把背景设为透明，自认为是so easy得解决了。 这俩天看到一种利用点击事件比较坐标讨巧的方式。有俩种方式: 1、往View上加点击事件 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,83 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/16/a-new-way-about-mask/">A New Way to Instead of Mask - Tap获得点击区域来判断</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-16T10:37:56+08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前在做UI的事件处理时，往往会有些新(蛋)颖(疼)的需求，比如要点击某块区域才能触发事件。
+这时候首先想到的方法是在这块区域上面加块蒙版(UIButton)，把背景设为透明，自认为是so easy得解决了。</p>
+
+<p>这俩天看到一种利用点击事件比较坐标讨巧的方式。有俩种方式:</p>
+
+<ul>
+<li>1、往View上加点击事件</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'>
+</span><span class='line'> <span class="p">[</span><span class="n">self</span> <span class="nl">addGestureRecognizer:</span><span class="p">[[</span><span class="n">UITapGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">touchView:</span><span class="p">)]];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">touchView:</span><span class="p">(</span><span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">tap</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">CGPoint</span> <span class="n">touchPoint</span> <span class="o">=</span> <span class="p">[</span><span class="n">tap</span> <span class="nl">locationInView:</span><span class="n">self</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//拿到点击区域的坐标后进行比较 处理相应业务逻辑</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>2、 直接重写view 的touchesEnded:withEvent 方法, 拿到事件的target view获得坐标</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/01/16/a-new-way-about-mask/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -181,7 +259,9 @@ Default value is YES, which allows the view controller to adjust its scroll view
   </header>
 
 
-  <div class="entry-content"><p>static NSString <em>identifier = @&ldquo;cell&rdquo;;
+  <div class="entry-content"><p>第一次需要实例化一屏所能展 Contentview N个的实例入queue，对下次屏幕展示的view分别都重用这N个。</p>
+
+<p>static NSString <em>identifier = @&ldquo;cell&rdquo;;
 UICustomerCell </em>cell = [tableView dequeueReusableCellWithIdentifier:identifier];</p>
 
 <p>在 UICustomerCell 需要托人 UITableVIewCell 的控件 设置 identifier 为 &ldquo;cell&rdquo;</p>
@@ -619,6 +699,10 @@ vim ~/.zshrc
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/16/a-new-way-about-mask/">A New Way to Instead of Mask - Tap获得点击区域来判断</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/">AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性</a>
       </li>
     
@@ -632,10 +716,6 @@ vim ~/.zshrc
     
       <li class="post">
         <a href="/blog/2014/06/14/traversal-send-message/">遍历发消息</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/11/ios-loading-view/">iOS-Loading-View</a>
       </li>
     
   </ul>
@@ -739,7 +819,7 @@ $(document).ready(function(){
 </script>
 
 <p>
-   &copy; 2014 - EasonWoW -
+   &copy; 2015 - EasonWoW -
    <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
    <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
   </p>
