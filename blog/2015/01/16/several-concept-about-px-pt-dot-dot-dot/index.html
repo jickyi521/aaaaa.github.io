@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>两种添加自定义view的方式 - A blog of EasonWoW</title>
+  <title>Several Concepts About Px Pt Dp... 关于屏幕适配的几个单位的概念 - A blog of EasonWoW</title>
   <meta name="author" content="EasonWoW">
 
   
-  <meta name="description" content="这种使用场景最普遍了吧，稍不留神就碰到没有将自定的custom的view加成功的trick 需要注意的两点 1、对于ViewController 在xib文件里 File&rsquo;s Owner 右侧 inspector 中的custom 对于ViewController, &hellip;">
+  <meta name="description" content="最近在做 适配 的问题，当看到上面这张图后，顿时对这几个概念还有之前Android的dp、sp有些失措。 于是先理了下目前所有iPhone设备的参数情况: &hellip;&hellip;&hellip;&hellip;. iPhone 3G/S iPhone 4/4S iPhone 5/5S/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,9 +18,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jickyi521.github.io/blog/2014/06/14/two-ways-init-customer-view">
+  <link rel="canonical" href="http://jickyi521.github.io/blog/2015/01/16/several-concept-about-px-pt-dot-dot-dot">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   
   <link href="/atom.xml" rel="alternate" title="A blog of EasonWoW" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -72,7 +74,7 @@
   
   <header>
     
-      <h1 class="entry-title">两种添加自定义view的方式</h1>
+      <h1 class="entry-title">Several Concepts About Px Pt Dp... 关于屏幕适配的几个单位的概念</h1>
     
     
       <p class="meta">
@@ -88,73 +90,112 @@
   
 
 
-<time datetime="2014-06-14T15:17:13+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2014</time>
+<time datetime="2015-01-16T14:30:22+08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>这种使用场景最普遍了吧，稍不留神就碰到没有将自定的custom的view加成功的trick</p>
+<div class="entry-content"><p><img src="/images/0120_01.png"></p>
 
-<p><code>需要注意的两点</code></p>
+<p>最近在做 适配 的问题，当看到上面这张图后，顿时对这几个概念还有之前Android的dp、sp有些失措。</p>
 
-<ul>
-<li>1、对于ViewController 在xib文件里 File&rsquo;s Owner 右侧 inspector 中的custom 对于ViewController,不然识别不了里面的outlet和IBAction</li>
-</ul>
+<p>于是先理了下目前所有iPhone设备的参数情况:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">  &hellip;&hellip;&hellip;&hellip;.</th>
+<th align="center">  iPhone 3G/S  </th>
+<th align="center"> iPhone 4/4S  </th>
+<th align="center"> iPhone 5/5S/5C  </th>
+<th align="center">     iPhone 6  </th>
+<th align="right">   iPhone 6+  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">  Screen Size  </td>
+<td align="center">      3.5&#8217;     </td>
+<td align="center">       4&#8217;     </td>
+<td align="center">        4.7&#8217;     </td>
+<td align="center">       4.7&#8217;    </td>
+<td align="right">       5.5&#8217;   </td>
+</tr>
+<tr>
+<td align="left">  Physic Pixel </td>
+<td align="center">    320*480    </td>
+<td align="center">    640*960   </td>
+<td align="center">     640*1136    </td>
+<td align="center">     750*1334  </td>
+<td align="right">    1080*1920 </td>
+</tr>
+<tr>
+<td align="left">  Logic Pixel  </td>
+<td align="center">    320*480    </td>
+<td align="center">    320*480   </td>
+<td align="center">      320*568    </td>
+<td align="center">     375*667   </td>
+<td align="right">     414*736  </td>
+</tr>
+<tr>
+<td align="left">  Scale        </td>
+<td align="center">      @1x      </td>
+<td align="center">      @2x     </td>
+<td align="center">        @2x      </td>
+<td align="center">       @2x     </td>
+<td align="right">       @3x    </td>
+</tr>
+<tr>
+<td align="left">  PPI          </td>
+<td align="center">      163      </td>
+<td align="center">      326     </td>
+<td align="center">        326      </td>
+<td align="center">       326     </td>
+<td align="right">       401    </td>
+</tr>
+<tr>
+<td align="left">  DPI          </td>
+<td align="center">      163      </td>
+<td align="center">      163     </td>
+<td align="center">        163      </td>
+<td align="center">       163     </td>
+<td align="right">       154    </td>
+</tr>
+</tbody>
+</table>
 
 
-<p><img src="/images/iOS_fileowner.png"></p>
+<h3>尺寸</h3>
 
-<ul>
-<li>2、对于普通的 custom UIView 需要将最顶层的UIView 的custom class填对应即可:</li>
-</ul>
+<blockquote><p>对角线的物理英寸数，1 inch = 2.54 cm</p></blockquote>
 
+<h3>像素分辨率</h3>
 
-<p><img src="/images/iOS_customclass.png"></p>
+<blockquote><p>一屏下一共最多可以显示了多少像素</p></blockquote>
 
-<p>两种添加方式，上代码吧&hellip;</p>
+<h3>逻辑分辨率/像素/PT</h3>
 
-<p><code>第一种:</code></p>
+<blockquote><p>一屏下一共最多可以显示了逻辑像素/PT</p></blockquote>
 
-<p> 常见的方式在需要加入custom view处进行初始化
- 需要注意的是，这种方式去初始化CustomView的时候是不会调 initFrame 构造方法，所以外面需要主动给frame</p>
+<h3>倍率</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">CustomView</span> <span class="o">*</span><span class="n">customView</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;CustomView&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
+<blockquote><p>像素分辨率/逻辑分辨率， 这个决定UX的切图</p></blockquote>
 
+<h3>PPI/屏幕密度</h3>
 
-<p> <code>第二种:</code></p>
+<blockquote><p>Pixels per inch, 每英寸的像素数量, 高质量的屏幕显示像素精细优雅，看起来比较小，低ppi的相对粗糙，看起来大</p></blockquote>
 
-<p>常见的方式在需要加入custom view处进行初始化, 然后在 CustomView 里面的  initWithFrame 去 load</p>
+<h3>DPI/屏幕点数</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">CustomView</span> <span class="o">*</span><span class="n">customView</span> <span class="o">=</span> <span class="p">[</span><span class="n">CustomView</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithFrame</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithFrame:</span><span class="p">(</span><span class="n">CGRect</span><span class="p">)</span><span class="nv">frame</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nl">initWithFrame:</span><span class="n">frame</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">self</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;CustomView&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
+<blockquote><p>Dots per inch. 这是逻辑概念的点数，乘倍率就为像素 dpi</p></blockquote>
 
+<p>另外iPhone 6屏幕实际可显示分辨率 1242 x 2208缩放到1080x1920优化显示。</p>
 
-<p>推荐用第二种方式，封装性更好，也可以避免没有set frame的坑。</p>
+<p><a href="http://weizhifeng.net/you-should-know-about-dpi.html">http://weizhifeng.net/you-should-know-about-dpi.html</a>
+<a href="http://www.zhihu.com/question/25361043">http://www.zhihu.com/question/25361043</a>
+<a href="http://blakespot.com/ios_device_specifications_grid.html">http://blakespot.com/ios_device_specifications_grid.html</a></p>
 </div>
 
 
@@ -177,7 +218,7 @@
   
 
 
-<time datetime="2014-06-14T15:17:13+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2014</time>
+<time datetime="2015-01-16T14:30:22+08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2015</time>
       
 
 <span class="categories">
@@ -217,10 +258,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/06/14/traversal-send-message/" title="Previous Post: 遍历发消息">&laquo; 遍历发消息</a>
+        <a class="basic-alignment left" href="/blog/2015/01/16/a-new-way-about-mask/" title="Previous Post: A New Way to instead of Mask - Tap获得点击区域来判断">&laquo; A New Way to instead of Mask - Tap获得点击区域来判断</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/17/ios-tableview-reuse-cell/" title="Next Post: iOS-tableview-reuse-cell">iOS-tableview-reuse-cell &raquo;</a>
       
     </p>
   </footer>
