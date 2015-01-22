@@ -4,7 +4,7 @@
   <title><![CDATA[A blog of EasonWoW]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2015-01-21T18:03:32+08:00</updated>
+  <updated>2015-01-22T11:38:13+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Several Concepts About Px Pt Dp... 关于屏幕适配的几个单位的概念]]></title>
-    <link href="http://jickyi521.github.io/blog/2015/01/16/several-concept-about-px-pt-dot-dot-dot/"/>
-    <updated>2015-01-16T14:30:22+08:00</updated>
-    <id>http://jickyi521.github.io/blog/2015/01/16/several-concept-about-px-pt-dot-dot-dot</id>
+    <link href="http://jickyi521.github.io/blog/2015/01/20/several-concept-about-px-pt-dot-dot-dot/"/>
+    <updated>2015-01-20T14:30:22+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2015/01/20/several-concept-about-px-pt-dot-dot-dot</id>
     <content type="html"><![CDATA[<p><img src="http://jickyi521.github.io/images/0120_01.png"></p>
 
 <p>最近在做 适配 的问题，当看到上面这张图后，顿时对这几个概念还有之前Android的dp、sp有些失措。</p>
@@ -27,88 +27,88 @@
 <table>
 <thead>
 <tr>
-<th align="left">  &hellip;&hellip;&hellip;&hellip;.</th>
+<th align="center">   Unit  </th>
 <th align="center">  iPhone 3G/S  </th>
 <th align="center"> iPhone 4/4S  </th>
 <th align="center"> iPhone 5/5S/5C  </th>
 <th align="center">     iPhone 6  </th>
-<th align="right">   iPhone 6+  </th>
+<th align="center">   iPhone 6+  </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">  Screen Size  </td>
+<td align="center">  Screen Size  </td>
 <td align="center">      3.5&#8217;     </td>
 <td align="center">       4&#8217;     </td>
 <td align="center">        4.7&#8217;     </td>
 <td align="center">       4.7&#8217;    </td>
-<td align="right">       5.5&#8217;   </td>
+<td align="center">       5.5&#8217;   </td>
 </tr>
 <tr>
-<td align="left">  Physic Pixel </td>
+<td align="center">  Physic Pixel </td>
 <td align="center">    320*480    </td>
 <td align="center">    640*960   </td>
 <td align="center">     640*1136    </td>
 <td align="center">     750*1334  </td>
-<td align="right">    1080*1920 </td>
+<td align="center">    1080*1920 </td>
 </tr>
 <tr>
-<td align="left">  Logic Pixel  </td>
+<td align="center">  Logic Pixel  </td>
 <td align="center">    320*480    </td>
 <td align="center">    320*480   </td>
 <td align="center">      320*568    </td>
 <td align="center">     375*667   </td>
-<td align="right">     414*736  </td>
+<td align="center">     414*736  </td>
 </tr>
 <tr>
-<td align="left">  Scale        </td>
+<td align="center">  Scale        </td>
 <td align="center">      @1x      </td>
 <td align="center">      @2x     </td>
 <td align="center">        @2x      </td>
 <td align="center">       @2x     </td>
-<td align="right">       @3x    </td>
+<td align="center">       @3x    </td>
 </tr>
 <tr>
-<td align="left">  PPI          </td>
+<td align="center">  PPI          </td>
 <td align="center">      163      </td>
 <td align="center">      326     </td>
 <td align="center">        326      </td>
 <td align="center">       326     </td>
-<td align="right">       401    </td>
+<td align="center">       401    </td>
 </tr>
 <tr>
-<td align="left">  DPI          </td>
+<td align="center">  DPI          </td>
 <td align="center">      163      </td>
 <td align="center">      163     </td>
 <td align="center">        163      </td>
 <td align="center">       163     </td>
-<td align="right">       154    </td>
+<td align="center">       154    </td>
 </tr>
 </tbody>
 </table>
 
 
-<h3>尺寸</h3>
+<h3><em>尺寸</em></h3>
 
 <blockquote><p>对角线的物理英寸数，1 inch = 2.54 cm</p></blockquote>
 
-<h3>像素分辨率</h3>
+<h3><em>像素分辨率</em></h3>
 
 <blockquote><p>一屏下一共最多可以显示了多少像素</p></blockquote>
 
-<h3>逻辑分辨率/像素/PT</h3>
+<h3><em>逻辑分辨率/像素/PT</em></h3>
 
 <blockquote><p>一屏下一共最多可以显示了逻辑像素/PT</p></blockquote>
 
-<h3>倍率</h3>
+<h3><em>倍率</em></h3>
 
 <blockquote><p>像素分辨率/逻辑分辨率， 这个决定UX的切图</p></blockquote>
 
-<h3>PPI/屏幕密度</h3>
+<h3><em>PPI/屏幕密度</em></h3>
 
 <blockquote><p>Pixels per inch, 每英寸的像素数量, 高质量的屏幕显示像素精细优雅，看起来比较小，低ppi的相对粗糙，看起来大</p></blockquote>
 
-<h3>DPI/屏幕点数</h3>
+<h3><em>DPI/屏幕点数</em></h3>
 
 <blockquote><p>Dots per inch. 这是逻辑概念的点数，乘倍率就为像素 dpi</p></blockquote>
 
