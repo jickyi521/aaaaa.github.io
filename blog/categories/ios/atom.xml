@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | A blog of EasonWoW]]></title>
   <link href="http://jickyi521.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2015-01-22T11:38:13+08:00</updated>
+  <updated>2015-01-23T11:48:42+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -12,6 +12,165 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[LayoutSubViews_Not_Called_iOS_8.0.2]]></title>
+    <link href="http://jickyi521.github.io/blog/2015/01/23/layoutsubviews-not-called-ios-8-dot-0-2/"/>
+    <updated>2015-01-23T11:00:49+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2015/01/23/layoutsubviews-not-called-ios-8-dot-0-2</id>
+    <content type="html"><![CDATA[<p>最近在做一个非常简单的需求，就是在一个lable里面显示百分比。
+实现的方式是在lable里面加了两个layers，这样后续如果要加动画也可方便扩展。</p>
+
+<p><img src="/images/0123_01.png"></p>
+
+<p>实现代码:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">updateViewWithLeftColor:</span><span class="p">(</span><span class="n">UIColor</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">leftColor</span> <span class="nl">andRightColor:</span><span class="p">(</span><span class="n">UIColor</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">rightColor</span> <span class="nl">andProgress:</span><span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="n">progress</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">if</span><span class="p">(</span><span class="o">!&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">leftView</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="o">!&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">rightView</span><span class="p">){</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">leftView</span> <span class="o">=</span> <span class="p">[</span><span class="n">CALayer</span> <span class="n">layer</span><span class="p">];</span>
+</span><span class='line'>      <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">rightView</span> <span class="o">=</span> <span class="p">[</span><span class="n">CALayer</span> <span class="n">layer</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">layer</span> <span class="nl">addSublayer:</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">leftView</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">layer</span> <span class="nl">addSublayer:</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">rightView</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">leftView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">leftColor</span><span class="p">.</span><span class="n">CGColor</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">rightView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">rightColor</span><span class="p">.</span><span class="n">CGColor</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">_leftPercent</span> <span class="o">=</span> <span class="n">progress</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[</span><span class="n">self</span> <span class="n">setNeedsLayout</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&amp;</span><span class="n">ndash</span><span class="p">;(</span><span class="kt">void</span><span class="p">)</span><span class="n">layoutSubviews</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">super</span> <span class="n">layoutSubviews</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">width</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">height</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">leftWidth</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">_leftPercent</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="n">_leftView</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">leftWidth</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+</span><span class='line'><span class="n">_rightView</span> <span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="n">leftWidth</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fabs</span><span class="p">(</span><span class="n">width</span> <span class="o">-</span> <span class="n">leftWidth</span><span class="p">),</span> <span class="n">height</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>测试发现在8.0.2上面，显示条没有正确绘制。调试发现在此版本
+[self setNeedsLayout] 之后并没有调用 layoutSubviews去绘制进度。在7.1和8.1是没有问题，stackoverflow上面找到可能是苹果 8.0 &ndash; 8.1间版本的bug。</p>
+
+<p><img src="/images/0123_02.png"></p>
+
+<p>原因是大概清楚了，解决起来也很简单，直接不用layoutSubviews.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">updateViewWithLeftColor:</span><span class="p">(</span><span class="n">UIColor</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">leftColor</span> <span class="nl">andRightColor:</span><span class="p">(</span><span class="n">UIColor</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">rightColor</span> <span class="nl">andProgress:</span><span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="n">progress</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">_leftView</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="o">!</span><span class="n">_rightView</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">_leftView</span> <span class="o">=</span> <span class="p">[</span><span class="n">CALayer</span> <span class="n">layer</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">_rightView</span> <span class="o">=</span> <span class="p">[</span><span class="n">CALayer</span> <span class="n">layer</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">layer</span> <span class="nl">addSublayer:</span><span class="n">_leftView</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">layer</span> <span class="nl">addSublayer:</span><span class="n">_rightView</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">_leftView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">leftColor</span><span class="p">.</span><span class="n">CGColor</span><span class="p">;</span>
+</span><span class='line'><span class="n">_rightView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">rightColor</span><span class="p">.</span><span class="n">CGColor</span><span class="p">;</span>
+</span><span class='line'><span class="n">_leftPercent</span> <span class="o">=</span> <span class="n">progress</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">width</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">height</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">leftWidth</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">_leftPercent</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="n">_leftView</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">leftWidth</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+</span><span class='line'><span class="n">_rightView</span> <span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="n">leftWidth</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fabs</span><span class="p">(</span><span class="n">width</span> <span class="o">-</span> <span class="n">leftWidth</span><span class="p">),</span> <span class="n">height</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//[self setNeedsLayout] 8.0.2  不会调 layoutSubviews TODO</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>那么问题来了，什么时候用 layoutSubviews???</p>
+
+<p>TODO</p>
+
+<!--more-->
+
+
+<p><a href="http://stackoverflow.com/questions/24510596/xcode6-ios8-and-voidlayoutsubviews">http://stackoverflow.com/questions/24510596/xcode6-ios8-and-voidlayoutsubviews</a>
+<a href="http://www.cocoachina.com/industry/20110731/3071.html">http://www.cocoachina.com/industry/20110731/3071.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Several Concepts About Px Pt Dp... 关于屏幕适配的几个单位的概念]]></title>
@@ -86,6 +245,9 @@
 </tr>
 </tbody>
 </table>
+
+
+<!--more-->
 
 
 <h3><em>尺寸</em></h3>
@@ -378,74 +540,6 @@ class ViewHolder {
     TextView titleTextView;
 }
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[两种添加自定义view的方式]]></title>
-    <link href="http://jickyi521.github.io/blog/2014/06/14/two-ways-init-customer-view/"/>
-    <updated>2014-06-14T15:17:13+08:00</updated>
-    <id>http://jickyi521.github.io/blog/2014/06/14/two-ways-init-customer-view</id>
-    <content type="html"><![CDATA[<p>这种使用场景最普遍了吧，稍不留神就碰到没有将自定的custom的view加成功的trick</p>
-
-<p><code>需要注意的两点</code></p>
-
-<ul>
-<li>1、对于ViewController 在xib文件里 File&rsquo;s Owner 右侧 inspector 中的custom 对于ViewController,不然识别不了里面的outlet和IBAction</li>
-</ul>
-
-
-<p><img src="/images/iOS_fileowner.png"></p>
-
-<ul>
-<li>2、对于普通的 custom UIView 需要将最顶层的UIView 的custom class填对应即可:</li>
-</ul>
-
-
-<p><img src="/images/iOS_customclass.png"></p>
-
-<p>两种添加方式，上代码吧&hellip;</p>
-
-<p><code>第一种:</code></p>
-
-<p> 常见的方式在需要加入custom view处进行初始化
- 需要注意的是，这种方式去初始化CustomView的时候是不会调 initFrame 构造方法，所以外面需要主动给frame</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">CustomView</span> <span class="o">*</span><span class="n">customView</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">CustomView</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p> <code>第二种:</code></p>
-
-<p>常见的方式在需要加入custom view处进行初始化, 然后在 CustomView 里面的  initWithFrame 去 load</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">CustomView</span> <span class="o">*</span><span class="n">customView</span> <span class="o">=</span> <span class="p">[</span><span class="n">CustomView</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithFrame</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">initWithFrame:</span><span class="p">(</span><span class="n">CGRect</span><span class="p">)</span><span class="n">frame</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nl">initWithFrame:</span><span class="n">frame</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">self</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">CustomView</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></li>
-</ul>
-
-
-<p>推荐用第二种方式，封装性更好，也可以避免没有set frame的坑。</p>
 ]]></content>
   </entry>
   
