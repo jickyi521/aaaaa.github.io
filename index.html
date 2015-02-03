@@ -9,32 +9,7 @@
   <meta name="author" content="EasonWoW">
 
   
-  <meta name="description" content="最近在做一个非常简单的需求，就是在一个lable里面显示百分比。
-实现的方式是在lable里面加了两个layers，这样后续如果要加动画也可方便扩展。 实现代码: 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25 &hellip;">
+  <meta name="description" content="Git rebase: 这个命令主要是做分支之间的合并操作，与merge不一样的地方是它可以保持合并分支提交记录的 线性，在提交历史的视图保持整洁干净。 (It can take advantage of rebasing is that it can be used to make a nice &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,7 +39,7 @@
   <header role="banner"><hgroup>
   <h1><a href="/">A blog of EasonWoW</a></h1>
   
-    <h2>Moving On</h2>
+    <h2>Focus~ Moving On...</h2>
   
 </hgroup>
 
@@ -94,6 +69,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/27/git-command-gitflow/">Git_command_gitflow</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-27T15:51:21+08:00" pubdate data-updated="true">Jan 27<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Git rebase:</p>
+
+<p>这个命令主要是做分支之间的合并操作，与merge不一样的地方是它可以保持合并分支提交记录的 线性，在提交历史的视图保持整洁干净。 (It can take advantage of rebasing is that it can be used to make a nice linear sequence of commits, the commit log/history of the respository will be a lot cleaner if only rebasing is allowed)</p>
+
+<p><img src="/images/0127_01.png"></p>
+
+<p>&ndash;> git rebase master</p>
+
+<p>  <img src="/images/0127_02.png"></p>
+
+<p>  @TODO</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -952,46 +973,9 @@ vim ~/.zshrc
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/10/hello-wolrd/">Hello Wolrd</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-10T23:29:04+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li><code>echo Hello World</code></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1002,6 +986,10 @@ vim ~/.zshrc
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/27/git-command-gitflow/">Git_command_gitflow</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/01/23/layoutsubviews-not-called-ios-8-dot-0-2/">LayoutSubViews_Not_Called_iOS_8.0.2</a>
@@ -1017,10 +1005,6 @@ vim ~/.zshrc
     
       <li class="post">
         <a href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/">AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/17/ios-tableview-reuse-cell/">iOS-tableview-reuse-cell</a>
       </li>
     
   </ul>

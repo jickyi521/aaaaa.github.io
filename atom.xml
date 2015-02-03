@@ -4,7 +4,7 @@
   <title><![CDATA[A blog of EasonWoW]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2015-01-23T11:48:42+08:00</updated>
+  <updated>2015-02-03T11:33:01+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git_command_gitflow]]></title>
+    <link href="http://jickyi521.github.io/blog/2015/01/27/git-command-gitflow/"/>
+    <updated>2015-01-27T15:51:21+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2015/01/27/git-command-gitflow</id>
+    <content type="html"><![CDATA[<p>Git rebase:</p>
+
+<p>这个命令主要是做分支之间的合并操作，与merge不一样的地方是它可以保持合并分支提交记录的 线性，在提交历史的视图保持整洁干净。 (It can take advantage of rebasing is that it can be used to make a nice linear sequence of commits, the commit log/history of the respository will be a lot cleaner if only rebasing is allowed)</p>
+
+<p><img src="http://jickyi521.github.io/images/0127_01.png"></p>
+
+<p>&ndash;> git rebase master</p>
+
+<p>  <img src="http://jickyi521.github.io/images/0127_02.png"></p>
+
+<p>  @TODO</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[LayoutSubViews_Not_Called_iOS_8.0.2]]></title>
