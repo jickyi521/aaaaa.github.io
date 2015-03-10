@@ -9,7 +9,7 @@
   <meta name="author" content="EasonWoW">
 
   
-  <meta name="description" content="Git rebase: 这个命令主要是做分支之间的合并操作，与merge不一样的地方是它可以保持合并分支提交记录的 线性，在提交历史的视图保持整洁干净。 (It can take advantage of rebasing is that it can be used to make a nice &hellip;">
+  <meta name="description" content="Autolayout 知识点整理 Autolayout是iOS6中推出的一个新的自适应布局策略，在iPhone6推出之前因为iPhone上适配问题相对简单(3.5、4)，在加上学这个新东东时间成本很大，而XIB的Autoresizing基本都可以搞定简单布局。 所以其重要性一直被忽视&hellip &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,106 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/02/03/autolayout-learning/">Autolayout Learning</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-03T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Autolayout 知识点整理</h2>
+
+<p>Autolayout是iOS6中推出的一个新的自适应布局策略，在iPhone6推出之前因为iPhone上适配问题相对简单(3.5、4)，在加上学这个新东东时间成本很大，而XIB的Autoresizing基本都可以搞定简单布局。 所以其重要性一直被忽视&hellip;</p>
+
+<p>自苹果推出iPhone6后，尺寸又多出俩(4.7、5.5)，传统的Fram、Autoresizing以及很难去Handle屏幕尺寸多样话带来的适配问题，Autolayout舍我其谁。</p>
+
+<p>Autolayout主要解决以下两个问题：</p>
+
+<ul>
+<li>1、屏幕适配问题</li>
+<li>2、横竖屏问题</li>
+</ul>
+
+
+<p>它的用法主要以下几个步骤：</p>
+
+<ul>
+<li>1、将view添加至superView中</li>
+<li>2、禁用Autoresizing</li>
+<li>3、设置NSLayoutConstraint</li>
+<li>4、更新NSLayoutConstraint</li>
+</ul>
+
+
+<h2>创建NSLayoutConstraint</h2>
+
+<p>*1、VFL</p>
+
+<h4>API</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nf">constraintsWithVisualFormat:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">format</span> <span class="nf">options:</span><span class="p">(</span><span class="n">NSLayoutFormatOptions</span><span class="p">)</span><span class="nv">opts</span> <span class="nf">metrics:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">metrics</span> <span class="nf">views:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">views</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>实例</h4>
+
+<p>*2、数学表达式</p>
+
+<h4>API</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nf">constraintWithItem:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">view1</span> <span class="nf">attribute:</span><span class="p">(</span><span class="n">NSLayoutAttribute</span><span class="p">)</span><span class="nv">attr1</span> <span class="nf">relatedBy:</span><span class="p">(</span><span class="n">NSLayoutRelation</span><span class="p">)</span><span class="nv">relation</span> <span class="nf">toItem:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">view2</span> <span class="nf">attribute:</span><span class="p">(</span><span class="n">NSLayoutAttribute</span><span class="p">)</span><span class="nv">attr2</span> <span class="nf">multiplier:</span><span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nv">multiplier</span> <span class="nf">constant:</span><span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nv">c</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>实例</h4>
+
+<p>constraintsWithVisualFormat : VFL
+H 横向布局<br/>
+V 垂直布局</p>
+
+<p>“|”代表布局件的边界</p>
+
+<ul>
+<li><p>lable宽度等于lable设置text的值 [NSLayoutConstraint constraintsWithVisualFormat:@&ldquo;H:|[lable]&rdquo; options:0 metrics:nil views:binds]</p></li>
+<li><p>lable宽度等于屏幕的宽度 [NSLayoutConstraint constraintsWithVisualFormat:@&ldquo;H:|[lable]|&rdquo; options:0 metrics:nil views:binds]</p></li>
+<li><p>lable宽度等于指定的宽度 [NSLayoutConstraint constraintsWithVisualFormat:@&ldquo;H:|[lable]&rdquo; options:0 metrics:nil views:binds]</p></li>
+<li><p>使lable1垂直居中于view [NSLayoutConstraint constraintWithItem:lable1 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f]</p></li>
+<li><p>让高度为10的separtorView垂直居中于view</p></li>
+</ul>
+
+
+<p> [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@&ldquo;V:[separtorView(10)]&rdquo; options:0 metrics:nil views:bindings]];
+[self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f]];</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/01/27/git-command-gitflow/">Git_command_gitflow</a></h1>
     
     
@@ -107,6 +207,19 @@
 <p>&ndash;> git rebase master</p>
 
 <p>  <img src="/images/0127_02.png"></p>
+
+<h2>git是reset使用</h2>
+
+<p>reset的意思是重置修改恢复某个版本的快照</p>
+
+<p>git reset &mdash;hard HEAD~1  如果本地有改动就清除然后恢复到上一次提交记录快照, 这之间的commit改动文件也被清除
+git reset &mdash;soft HEAD~1  如果本地有改动就清除然后恢复到上一次提交记录快照, 这之间的commit改动文件在stash中</p>
+
+<p>查看所有的提交历史，包括历史数上及之外的记录
+git reflog
+git reset HEAD</p>
+
+<p>比如要抹掉上个版本的commit记录，重新将本次的提交与上次的修改进行合并提交 &ndash;> git reset &mdash;soft HEAD~1</p>
 
 <p>  @TODO</p>
 </div>
@@ -905,74 +1018,6 @@ class ViewHolder {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/11/octopress-gitcafe/">Octopress和gitcafe 的搭建</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-11T20:49:53+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopress安装步骤可以参考 <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">象写程序一样写博客：搭建基于github的博客</a></p>
-
-<p>在mac mini 和 mbp 上安装过程额外发现的问题如下:</p>
-
-<h2>bundle install 安装失败</h2>
-
-<pre><code>先安ruby的rvm环境
-
-rvm --force install 1.9.2  
-gem install bundle --no-ri --no-rdoc
-bundle install
-</code></pre>
-
-<p>  <a href="http://stackoverflow.com/questions/12119138/failed-to-build-gem-native-extension-when-install-redcloth-4-2-9-install-linux">Reference</a></p>
-
-<h2>Zsh下octopress命令不识别</h2>
-
-<pre><code>rake new_post["test"]
--&gt;zsh: no matches found: new_post[test]
-
-*1、 由于zsh的通配符造成的 *, (, |, &lt;, [, ?, 可以用引号括起来 
-rake "new_post[test]"
-
-*2、要根治的话需要改zsh配置文件 加 alias rake="noglob rake" 取消通配    
-vim ~/.zshrc 
-</code></pre>
-
-<h2>中文问题</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/11/octopress-gitcafe/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -988,6 +1033,10 @@ vim ~/.zshrc
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/02/03/autolayout-learning/">Autolayout Learning</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/01/27/git-command-gitflow/">Git_command_gitflow</a>
       </li>
     
@@ -1001,10 +1050,6 @@ vim ~/.zshrc
     
       <li class="post">
         <a href="/blog/2015/01/16/a-new-way-about-mask/">A New Way to Instead of Mask - Tap获得点击区域来判断</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/07/02/use-automaticallyadjustsscrollviewinsets/">AutomaticallyAdjustsScrollViewInsets 和 Translucent 属性</a>
       </li>
     
   </ul>
