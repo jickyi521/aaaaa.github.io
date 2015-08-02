@@ -1,4 +1,101 @@
-<h2>Autolayout 知识点整理</h2>
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Autolayout_Learning 自适应布局整理 - A blog of EasonWoW</title>
+  <meta name="author" content="EasonWoW">
+
+  
+  <meta name="description" content="Autolayout 知识点整理 Autolayout是iOS6中推出的一个新的自适应布局策略，在iPhone6推出之前因为iPhone上适配问题相对简单(3.5、4)，在加上学这个新东东时间成本很大，而XIB的Autoresizing基本都可以搞定简单布局。 所以其重要性一直被忽视&hellip &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jickyi521.github.io/blog/2015/02/03/autolayout-learning">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <link href="/atom.xml" rel="alternate" title="A blog of EasonWoW" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.useso.com//ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">A blog of EasonWoW</a></h1>
+  
+    <h2>Focus~ Moving On...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jickyi521.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">博客主页</a></li>
+  <li><a href="/blog/archives">文章列表</a></li>
+  <li><a href="/blog/categories/ios">iOS</a></li>
+  <li><a href="/blog/categories/android">Android</a></li>
+  <li><a href="/about-me">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Autolayout_Learning 自适应布局整理</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-03T11:34:16+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Autolayout 知识点整理</h2>
 
 <p>Autolayout是iOS6中推出的一个新的自适应布局策略，在iPhone6推出之前因为iPhone上适配问题相对简单(3.5、4)，在加上学这个新东东时间成本很大，而XIB的Autoresizing基本都可以搞定简单布局。 所以其重要性一直被忽视&hellip;</p>
 
@@ -63,3 +160,225 @@ V 垂直布局</p>
 
 <p> [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@&ldquo;V:[separtorView(10)]&rdquo; options:0 metrics:nil views:bindings]];
 [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f]];</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">EasonWoW</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-03T11:34:16+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+
+  
+   		<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1394801336302625" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+<!-- UY END -->
+
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/01/27/git-command-gitflow/" title="Previous Post: Git_command_gitflow">&laquo; Git_command_gitflow</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/04/08/collectionview-tips/" title="Next Post: CollectionView Tips">CollectionView Tips &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/04/08/collectionview-tips/">CollectionView Tips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/02/03/autolayout-learning/">Autolayout_Learning 自适应布局整理</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/27/git-command-gitflow/">Git_command_gitflow</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/23/layoutsubviews-not-called-ios-8-dot-0-2/">LayoutSubViews_Not_Called_iOS_8.0.2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/20/several-concept-about-px-pt-dot-dot-dot/">Several Concepts About Px Pt Dp... 关于屏幕适配的几个单位的概念</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>访客地图</h1>
+  <script type="text/javascript" src="http://jh.revolvermaps.com/2/1.js?i=7vm1s79rfqr&amp;s=220&amp;m=0&amp;v=false&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async"></script>
+  <!--将上文获取的代码添加到这-->
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<p id = "back-top">
+      <a href="#top"><span></span>Back to Top</a>
+</p> 
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(../../images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+/*
+#back-top a:hover span {
+  background-color: #888;
+}
+*/
+</style>
+<script type="text/javascript" src="http://ajax.useso.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<p>
+   &copy; 2015 - EasonWoW -
+   <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
+   <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
+  </p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

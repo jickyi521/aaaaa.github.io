@@ -4,7 +4,7 @@
   <title><![CDATA[A blog of EasonWoW]]></title>
   <link href="http://jickyi521.github.io/atom.xml" rel="self"/>
   <link href="http://jickyi521.github.io/"/>
-  <updated>2015-03-10T23:07:59+08:00</updated>
+  <updated>2015-08-02T21:32:20+08:00</updated>
   <id>http://jickyi521.github.io/</id>
   <author>
     <name><![CDATA[EasonWoW]]></name>
@@ -14,9 +14,24 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Autolayout Learning]]></title>
+    <title type="html"><![CDATA[CollectionView Tips]]></title>
+    <link href="http://jickyi521.github.io/blog/2015/04/08/collectionview-tips/"/>
+    <updated>2015-04-08T10:26:25+08:00</updated>
+    <id>http://jickyi521.github.io/blog/2015/04/08/collectionview-tips</id>
+    <content type="html"><![CDATA[<ul>
+<li><p>1、多列的tableview，最简单的是一个GridView</p></li>
+<li><p>2、标准的CollectionView包括cell、supplementary view和decoration view三部分</p></li>
+<li><p>3、实现一个UICollectionView和实现一个UITableView基本没有什么大区别，它们都同样是datasource和delegate设计模式的：datasource为view提供数据源，告诉view要显示些什么东西以及如何显示它们，delegate提供一些样式的小细节以及用户交互的相应</p></li>
+<li><p>4、一个UICollectionView的实现包括两个必要部分：UICollectionViewDataSource和UICollectionViewLayout，和一个交互部分：UICollectionViewDelegate</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Autolayout_Learning 自适应布局整理]]></title>
     <link href="http://jickyi521.github.io/blog/2015/02/03/autolayout-learning/"/>
-    <updated>2015-02-03T00:00:00+08:00</updated>
+    <updated>2015-02-03T11:34:16+08:00</updated>
     <id>http://jickyi521.github.io/blog/2015/02/03/autolayout-learning</id>
     <content type="html"><![CDATA[<h2>Autolayout 知识点整理</h2>
 
@@ -113,6 +128,8 @@ git reflog
 git reset HEAD</p>
 
 <p>比如要抹掉上个版本的commit记录，重新将本次的提交与上次的修改进行合并提交 &ndash;> git reset &mdash;soft HEAD~1</p>
+
+<h2>git remote prune origin</h2>
 
 <p>  @TODO</p>
 ]]></content>

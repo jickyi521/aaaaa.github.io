@@ -9,7 +9,9 @@
   <meta name="author" content="EasonWoW">
 
   
-  <meta name="description" content="Autolayout 知识点整理 Autolayout是iOS6中推出的一个新的自适应布局策略，在iPhone6推出之前因为iPhone上适配问题相对简单(3.5、4)，在加上学这个新东东时间成本很大，而XIB的Autoresizing基本都可以搞定简单布局。 所以其重要性一直被忽视&hellip &hellip;">
+  <meta name="description" content="1、多列的tableview，最简单的是一个GridView
+2、标准的CollectionView包括cell、supplementary view和decoration view三部分
+3、实现一个UICollectionView和实现一个UITableView基本没有什么大区别， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,7 +77,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/02/03/autolayout-learning/">Autolayout Learning</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/08/collectionview-tips/">CollectionView Tips</a></h1>
     
     
       <p class="meta">
@@ -91,7 +93,49 @@
   
 
 
-<time datetime="2015-02-03T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-08T10:26:25+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li><p>1、多列的tableview，最简单的是一个GridView</p></li>
+<li><p>2、标准的CollectionView包括cell、supplementary view和decoration view三部分</p></li>
+<li><p>3、实现一个UICollectionView和实现一个UITableView基本没有什么大区别，它们都同样是datasource和delegate设计模式的：datasource为view提供数据源，告诉view要显示些什么东西以及如何显示它们，delegate提供一些样式的小细节以及用户交互的相应</p></li>
+<li><p>4、一个UICollectionView的实现包括两个必要部分：UICollectionViewDataSource和UICollectionViewLayout，和一个交互部分：UICollectionViewDelegate</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/03/autolayout-learning/">Autolayout_Learning 自适应布局整理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-03T11:34:16+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2015</time>
         
       </p>
     
@@ -220,6 +264,8 @@ git reflog
 git reset HEAD</p>
 
 <p>比如要抹掉上个版本的commit记录，重新将本次的提交与上次的修改进行合并提交 &ndash;> git reset &mdash;soft HEAD~1</p>
+
+<h2>git remote prune origin</h2>
 
 <p>  @TODO</p>
 </div>
@@ -891,133 +937,6 @@ class ViewHolder {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/11/ios-loading-view/">iOS-Loading-View</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-11T22:42:44+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>应用场景</h2>
-
-<pre><code>在对用户或者流程上需要进行堵塞操作时候需要block，尤其是像Login, Oath 这种网络请求，
-这时候就需要个loadingview来作为缓冲（对于些展示的界面的网络请求，没有必要block)。
-对全局写个易用性好的LoadingView就很有必要，这个View相当于是个资源的Manager，基于这些写个单例是非常适合此种情况的。
-</code></pre>
-
-<p>·上代码吧&hellip;.·</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">.</span><span class="n">h</span>
-</span><span class='line'><span class="o">+</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">getShareInstance</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">show</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">stop</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">.</span><span class="n">m</span>
-</span><span class='line'><span class="o">+</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">getShareInstance</span><span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">instance</span><span class="p">){</span>
-</span><span class='line'>        <span class="n">instance</span> <span class="o">=</span> <span class="p">[[</span><span class="n">JYTLoadingView</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">initWithFrame:</span><span class="p">(</span><span class="n">CGRect</span><span class="p">)</span><span class="n">frame</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">self</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;JYTLoadingView&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">CGRect</span> <span class="n">frame</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIScreen</span> <span class="n">mainScreen</span><span class="p">].</span><span class="n">bounds</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">center</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">cornerRadius</span> <span class="o">=</span> <span class="mf">8.0</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">show</span><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">indicatorView</span> <span class="n">startAnimating</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">].</span><span class="n">keyWindow</span> <span class="nl">addSubview:</span><span class="n">self</span><span class="p">];</span>
-</span><span class='line'>     <span class="n">timer</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSTimer</span> <span class="nl">scheduledTimerWithTimeInterval:</span><span class="mi">3</span> <span class="nl">target:</span><span class="n">self</span> <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span> <span class="nl">userInfo:</span><span class="nb">nil</span> <span class="nl">repeats:</span><span class="n">NO</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">stop</span><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/11/ios-loading-view/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1033,7 +952,11 @@ class ViewHolder {
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/02/03/autolayout-learning/">Autolayout Learning</a>
+        <a href="/blog/2015/04/08/collectionview-tips/">CollectionView Tips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/02/03/autolayout-learning/">Autolayout_Learning 自适应布局整理</a>
       </li>
     
       <li class="post">
@@ -1046,10 +969,6 @@ class ViewHolder {
     
       <li class="post">
         <a href="/blog/2015/01/20/several-concept-about-px-pt-dot-dot-dot/">Several Concepts About Px Pt Dp&#8230; 关于屏幕适配的几个单位的概念</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/16/a-new-way-about-mask/">A New Way to Instead of Mask - Tap获得点击区域来判断</a>
       </li>
     
   </ul>

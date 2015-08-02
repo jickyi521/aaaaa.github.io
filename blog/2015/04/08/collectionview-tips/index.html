@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>两种添加自定义view的方式 - A blog of EasonWoW</title>
+  <title>CollectionView Tips - A blog of EasonWoW</title>
   <meta name="author" content="EasonWoW">
 
   
-  <meta name="description" content="这种使用场景最普遍了吧，稍不留神就碰到没有将自定的custom的view加成功的trick 需要注意的两点 1、对于ViewController 在xib文件里 File&rsquo;s Owner 右侧 inspector 中的custom 对于ViewController, &hellip;">
+  <meta name="description" content="1、多列的tableview，最简单的是一个GridView
+2、标准的CollectionView包括cell、supplementary view和decoration view三部分
+3、实现一个UICollectionView和实现一个UITableView基本没有什么大区别， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jickyi521.github.io/blog/2014/06/14/two-ways-init-customer-view">
+  <link rel="canonical" href="http://jickyi521.github.io/blog/2015/04/08/collectionview-tips">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   
@@ -72,7 +74,7 @@
   
   <header>
     
-      <h1 class="entry-title">两种添加自定义view的方式</h1>
+      <h1 class="entry-title">CollectionView Tips</h1>
     
     
       <p class="meta">
@@ -88,73 +90,20 @@
   
 
 
-<time datetime="2014-06-14T15:17:13+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2014</time>
+<time datetime="2015-04-08T10:26:25+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>这种使用场景最普遍了吧，稍不留神就碰到没有将自定的custom的view加成功的trick</p>
-
-<p><code>需要注意的两点</code></p>
-
-<ul>
-<li>1、对于ViewController 在xib文件里 File&rsquo;s Owner 右侧 inspector 中的custom 对于ViewController,不然识别不了里面的outlet和IBAction</li>
+<div class="entry-content"><ul>
+<li><p>1、多列的tableview，最简单的是一个GridView</p></li>
+<li><p>2、标准的CollectionView包括cell、supplementary view和decoration view三部分</p></li>
+<li><p>3、实现一个UICollectionView和实现一个UITableView基本没有什么大区别，它们都同样是datasource和delegate设计模式的：datasource为view提供数据源，告诉view要显示些什么东西以及如何显示它们，delegate提供一些样式的小细节以及用户交互的相应</p></li>
+<li><p>4、一个UICollectionView的实现包括两个必要部分：UICollectionViewDataSource和UICollectionViewLayout，和一个交互部分：UICollectionViewDelegate</p></li>
 </ul>
 
-
-<p><img src="/images/iOS_fileowner.png"></p>
-
-<ul>
-<li>2、对于普通的 custom UIView 需要将最顶层的UIView 的custom class填对应即可:</li>
-</ul>
-
-
-<p><img src="/images/iOS_customclass.png"></p>
-
-<p>两种添加方式，上代码吧&hellip;</p>
-
-<p><code>第一种:</code></p>
-
-<p> 常见的方式在需要加入custom view处进行初始化
- 需要注意的是，这种方式去初始化CustomView的时候是不会调 initFrame 构造方法，所以外面需要主动给frame</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">CustomView</span> <span class="o">*</span><span class="n">customView</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;CustomView&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> <code>第二种:</code></p>
-
-<p>常见的方式在需要加入custom view处进行初始化, 然后在 CustomView 里面的  initWithFrame 去 load</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">CustomView</span> <span class="o">*</span><span class="n">customView</span> <span class="o">=</span> <span class="p">[</span><span class="n">CustomView</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithFrame</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithFrame:</span><span class="p">(</span><span class="n">CGRect</span><span class="p">)</span><span class="nv">frame</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nl">initWithFrame:</span><span class="n">frame</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">self</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">loadNibNamed:</span><span class="s">@&quot;CustomView&quot;</span> <span class="nl">owner:</span><span class="n">self</span> <span class="nl">options:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>推荐用第二种方式，封装性更好，也可以避免没有set frame的坑。</p>
 </div>
 
 
@@ -177,7 +126,7 @@
   
 
 
-<time datetime="2014-06-14T15:17:13+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2014</time>
+<time datetime="2015-04-08T10:26:25+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2015</time>
       
 
 <span class="categories">
@@ -217,10 +166,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/06/14/traversal-send-message/" title="Previous Post: 遍历发消息">&laquo; 遍历发消息</a>
+        <a class="basic-alignment left" href="/blog/2015/02/03/autolayout-learning/" title="Previous Post: Autolayout_Learning 自适应布局整理">&laquo; Autolayout_Learning 自适应布局整理</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/17/ios-tableview-reuse-cell/" title="Next Post: iOS-tableview-reuse-cell">iOS-tableview-reuse-cell &raquo;</a>
       
     </p>
   </footer>
